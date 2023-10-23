@@ -46,7 +46,20 @@ if (Date.now() < new Date("2023-10-23").getTime()) {
 document.getElementById("halloween-theme").addEventListener("click", () => {
     const theme = "halloween-2023";
     disableTransitions();
-    document.body.setAttribute("data-theme", theme);
-    enableTransitions();
-    storage.set("theme", theme);
+    if (document.body.getAttribute("data-theme") === theme) {
+        if (originalTheme) {
+            document.body.setAttribute("data-theme", originalTheme);
+            enableTransitions();
+            storage.set("theme", originalTheme);
+        } else {
+            document.body.removeAttribute("data-theme");
+            enableTransitions();
+            storage.delete("theme");
+        };
+    } else {
+        var originalTheme = document.body.getAttribute("data-theme");
+        document.body.setAttribute("data-theme", theme);
+        enableTransitions();
+        storage.set("theme", theme);
+    };
 });
