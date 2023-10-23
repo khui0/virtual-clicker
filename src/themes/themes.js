@@ -47,7 +47,7 @@ document.getElementById("halloween-theme").addEventListener("click", () => {
     const theme = "halloween-2023";
     disableTransitions();
     if (document.body.getAttribute("data-theme") === theme) {
-        if (originalTheme) {
+        if (originalTheme != "") {
             document.body.setAttribute("data-theme", originalTheme);
             enableTransitions();
             storage.set("theme", originalTheme);
