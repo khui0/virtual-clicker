@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.208",
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/enhanced-img": "^0.2.0",
