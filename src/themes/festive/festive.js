@@ -1,1 +1,0 @@
-import "./festive.css";
