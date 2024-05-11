@@ -2,6 +2,7 @@
   import { title } from "$lib/store";
   import Title from "$lib/Title.svelte";
   import { onMount } from "svelte";
+  import { Toaster } from "svelte-french-toast";
 
   import BiList from "~icons/bi/list";
 
@@ -53,3 +54,5 @@
     </ul>
   </div>
 </div>
+
+<Toaster></Toaster>

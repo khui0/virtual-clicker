@@ -13,8 +13,10 @@
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
-    <h3 class="font-bold text-lg">{title}</h3>
-    <p class="py-4"><slot></slot></p>
+    <div class="flex flex-col gap-2">
+      <h3 class="font-bold text-lg">{title}</h3>
+      <slot></slot>
+    </div>
   </div>
   <form method="dialog" class="modal-backdrop">
     <button>close</button>

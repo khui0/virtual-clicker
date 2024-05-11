@@ -1,20 +1,41 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { settings } from "./store";
+  import toast from "svelte-french-toast";
   import "mathlive";
 
   import Modal from "./Modal.svelte";
 
-  let modal1: Modal;
+  import BiQuestion from "~icons/bi/question";
 
-  // settings.set({ code: "354" });
+  let seatCodeModal: Modal;
+  let seatCodeModalValue: string;
 
   let mathfieldVisible: boolean;
+
+  function saveSeatCode(e: Event) {
+    const regex: RegExp = /^[1-9][1-6][1-5]$/;
+    if (regex.test(seatCodeModalValue)) {
+      settings.set({ code: seatCodeModalValue });
+      toast.success(`Seat code is now ${seatCodeModalValue}`, { position: "bottom-center" });
+    } else {
+      e.preventDefault();
+      toast.error("Seat code isn't possible", { position: "bottom-center" });
+    }
+  }
 </script>
 
 <div class="flex items-center justify-center h-full">
   <div class="flex flex-col gap-2 w-[min(100%,600px)]">
-    <h2 class="text-3xl font-bold text-neutral-content">{$settings?.code || "000"}</h2>
+    <h2
+      class="text-3xl font-bold text-neutral-content cursor-pointer w-fit"
+      role="presentation"
+      on:click={() => {
+        seatCodeModal.show();
+        seatCodeModalValue = $settings?.code || "";
+      }}
+    >
+      {$settings?.code || "000"}
+    </h2>
     <div class="flex flex-row gap-2">
       <input type="text" placeholder="Question" class="input input-bordered w-full" />
       <label class="flex flex-col items-center text-neutral-content text-sm">
@@ -39,12 +60,24 @@
       <button class="btn btn-sm join-item flex-1">D</button>
       <button class="btn btn-sm join-item flex-1">E</button>
     </div>
-    <button class="btn rounded-full" on:click={()=> {
-      modal1.show();
-    }}>Submit</button>
+    <button class="btn rounded-full">Submit</button>
   </div>
 
-  <Modal title="testing" bind:this={modal1}>hello</Modal>
+  <Modal title="Seat code" bind:this={seatCodeModal}>
+    <div class="flex flex-row gap-2">
+      <input
+        type="text"
+        class="input input-bordered w-full"
+        placeholder="000"
+        bind:value={seatCodeModalValue}
+      />
+      <a href="/" class="btn btn-square"><BiQuestion></BiQuestion></a>
+    </div>
+    <form method="dialog" class="flex gap-2">
+      <button class="btn btn-sm flex-1">Cancel</button>
+      <button class="btn btn-sm flex-1" on:click={saveSeatCode}>Save</button>
+    </form>
+  </Modal>
 </div>
 
 <style>
@@ -73,5 +106,9 @@
 
   math-field::part(content) {
     padding: 0;
+  }
+
+  :global(.toast) {
+    @apply bg-base-200 text-base-content;
   }
 </style>
