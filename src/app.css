@@ -10,5 +10,6 @@ main {
 }
 
 html {
+  @apply scrollbar-thin scrollbar-thumb-base-200 hover:scrollbar-thumb-primary scrollbar-track-transparent;
   font-family: "Figtree Variable", sans-serif;
 }
