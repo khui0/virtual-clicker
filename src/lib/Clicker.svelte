@@ -1,14 +1,19 @@
 <script lang="ts">
   import { settings } from "./store";
+  import { click } from "./submit";
   import toast from "svelte-french-toast";
   import "mathlive";
 
   import Modal from "./Modal.svelte";
 
   import BiQuestion from "~icons/bi/question";
+  import { text } from "@sveltejs/kit";
 
   let seatCodeModal: Modal;
   let seatCodeModalValue: string;
+
+  let questionInputValue: string;
+  let textareaValue: string;
 
   let mathfieldVisible: boolean;
 
@@ -21,6 +26,22 @@
       e.preventDefault();
       toast.error("Seat code isn't possible", { position: "bottom-center" });
     }
+  }
+
+  function submitClick() {
+    if (!questionInputValue) {
+      toast.error("Question cannot be blank", { position: "bottom-center" });
+      return;
+    }
+    if (!textareaValue) {
+      toast.error("Response cannot be blank", { position: "bottom-center" });
+      return;
+    }
+    click(questionInputValue, textareaValue);
+    toast.success("Response submitted!", { position: "bottom-center" });
+    // Reset input fields
+    questionInputValue = "";
+    textareaValue = "";
   }
 </script>
 
@@ -37,7 +58,12 @@
       {$settings?.code || "000"}
     </h2>
     <div class="flex flex-row gap-2">
-      <input type="text" placeholder="Question" class="input input-bordered w-full" />
+      <input
+        type="text"
+        placeholder="Question"
+        class="input input-bordered w-full"
+        bind:value={questionInputValue}
+      />
       <label class="flex flex-col items-center text-neutral-content text-sm">
         Math
         <input type="checkbox" class="toggle" bind:checked={mathfieldVisible} />
@@ -48,6 +74,7 @@
         <textarea
           class="block textarea textarea-bordered resize-none w-full h-28"
           placeholder="Response"
+          bind:value={textareaValue}
         ></textarea>
       {:else}
         <math-field></math-field>
@@ -60,7 +87,7 @@
       <button class="btn btn-sm join-item flex-1">D</button>
       <button class="btn btn-sm join-item flex-1">E</button>
     </div>
-    <button class="btn rounded-full">Submit</button>
+    <button class="btn rounded-full" on:click={submitClick}>Submit</button>
   </div>
 
   <Modal title="Seat code" bind:this={seatCodeModal}>
