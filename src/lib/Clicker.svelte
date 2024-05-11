@@ -1,3 +1,9 @@
+<script lang="ts">
+  import "mathlive";
+
+  let mathfieldVisible: boolean;
+</script>
+
 <div class="flex items-center justify-center h-full">
   <div class="flex flex-col gap-2 w-[min(100%,600px)]">
     <h2 class="text-3xl font-bold text-neutral-content">000</h2>
@@ -5,14 +11,18 @@
       <input type="text" placeholder="Question" class="input input-bordered w-full" />
       <label class="flex flex-col items-center text-neutral-content text-sm">
         Math
-        <input type="checkbox" class="toggle" />
+        <input type="checkbox" class="toggle" bind:checked={mathfieldVisible} />
       </label>
     </div>
     <div>
-      <textarea
-        class="block textarea textarea-bordered resize-none w-full h-28"
-        placeholder="Response"
-      ></textarea>
+      {#if !mathfieldVisible}
+        <textarea
+          class="block textarea textarea-bordered resize-none w-full h-28"
+          placeholder="Response"
+        ></textarea>
+      {:else}
+        <math-field></math-field>
+      {/if}
     </div>
     <div class="join w-full">
       <button class="btn btn-sm join-item flex-1">A</button>
@@ -24,3 +34,32 @@
     <button class="btn rounded-full">Submit</button>
   </div>
 </div>
+
+<style>
+  math-field {
+    @apply w-full rounded-btn bg-base-100 text-base-content px-4 py-2 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] cursor-text;
+    --caret-color: theme(colors.base-content);
+    --contains-highlight-background-color: theme(colors.primary);
+    --text-font-family: "Figtree", sans-serif;
+  }
+
+  math-field:focus {
+    @apply outline-[var(--fallback-bc,oklch(var(--bc)/0.2))] outline-offset-2 outline-2 outline-none;
+  }
+
+  math-field::part(virtual-keyboard-toggle) {
+    @apply text-base-content bg-base-200 transition-colors;
+  }
+
+  math-field::part(virtual-keyboard-toggle):hover {
+    @apply bg-base-100;
+  }
+
+  math-field::part(menu-toggle) {
+    display: none;
+  }
+
+  math-field::part(content) {
+    padding: 0;
+  }
+</style>
