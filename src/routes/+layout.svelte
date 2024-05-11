@@ -38,7 +38,7 @@
       >
       <Title></Title>
     </div>
-    <div class="p-5 pt-0 h-full"><slot></slot></div>
+    <div class="p-5 pt-0 lg:pt-5 h-full"><slot></slot></div>
   </div>
   <div class="drawer-side">
     <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
