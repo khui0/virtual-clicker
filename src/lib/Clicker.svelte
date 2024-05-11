@@ -1,12 +1,20 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { settings } from "./store";
   import "mathlive";
+
+  import Modal from "./Modal.svelte";
+
+  let modal1: Modal;
+
+  // settings.set({ code: "354" });
 
   let mathfieldVisible: boolean;
 </script>
 
 <div class="flex items-center justify-center h-full">
   <div class="flex flex-col gap-2 w-[min(100%,600px)]">
-    <h2 class="text-3xl font-bold text-neutral-content">000</h2>
+    <h2 class="text-3xl font-bold text-neutral-content">{$settings?.code || "000"}</h2>
     <div class="flex flex-row gap-2">
       <input type="text" placeholder="Question" class="input input-bordered w-full" />
       <label class="flex flex-col items-center text-neutral-content text-sm">
@@ -31,8 +39,12 @@
       <button class="btn btn-sm join-item flex-1">D</button>
       <button class="btn btn-sm join-item flex-1">E</button>
     </div>
-    <button class="btn rounded-full">Submit</button>
+    <button class="btn rounded-full" on:click={()=> {
+      modal1.show();
+    }}>Submit</button>
   </div>
+
+  <Modal title="testing" bind:this={modal1}>hello</Modal>
 </div>
 
 <style>
