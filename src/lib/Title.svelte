@@ -6,5 +6,9 @@
 
 <div class="flex flex-row items-center gap-3">
   <a href="/"><Logo></Logo></a>
-  <h1 class="text-3xl font-bold">{($title && $page.url.pathname !== "/") || "Virtual Clicker"}</h1>
+  {#if $page.url.pathname === "/" || !$title}
+    <h1 class="text-3xl font-bold">Virtual Clicker</h1>
+  {:else}
+    <h1 class="text-3xl font-bold">{$title}</h1>
+  {/if}
 </div>

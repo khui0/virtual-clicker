@@ -54,6 +54,6 @@
     type="checkbox"
     title="Show seat code in title"
     bind:value={$settings.show_code_in_title}
-    >Controls if seat code is shown in window title</SettingsField
+    >Controls whether seat code is shown in window title</SettingsField
   >
 </div>
