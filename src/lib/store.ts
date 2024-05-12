@@ -2,8 +2,7 @@ import { writable, type Writable } from "svelte/store";
 import { browser } from "$app/environment";
 
 interface Settings {
-  code?: string;
-  theme: string;
+  [key: string]: string;
 }
 
 interface Resubmission {

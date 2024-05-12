@@ -11,10 +11,18 @@
   export let title: string;
   export let type: "checkbox" | "select" | "text";
   export let value: string = "";
-  export let checked: boolean = false;
   export let options: Option[] = [];
   export let maxlength: number | undefined = undefined;
   export let placeholder: string = "";
+
+  let checkbox: HTMLInputElement;
+
+  $: value,
+    (() => {
+      if (checkbox) {
+        checkbox.checked = value === "true";
+      }
+    })();
 
   const dispatch = createEventDispatcher();
 </script>
@@ -23,7 +31,14 @@
   <h2 class="font-bold mx-1">{title}</h2>
   {#if type === "checkbox"}
     <label class="label cursor-pointer items-start justify-normal gap-2">
-      <input type="checkbox" class="checkbox" bind:checked />
+      <input
+        type="checkbox"
+        class="checkbox"
+        bind:this={checkbox}
+        on:input={() => {
+          value = checkbox.checked ? "true" : "false";
+        }}
+      />
       <span class="label-text text-neutral-content"><slot></slot></span>
     </label>
   {:else if type === "select"}

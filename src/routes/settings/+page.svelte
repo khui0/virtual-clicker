@@ -44,7 +44,10 @@
   <SettingsField type="select" title="Theme" options={themes} bind:value={$settings.theme}
     >Select a theme</SettingsField
   >
-  <SettingsField type="checkbox" title="Start in equation editor"
+  <SettingsField
+    type="checkbox"
+    title="Start in equation editor"
+    bind:value={$settings.equation_default}
     >Controls if equation input is enabled by default</SettingsField
   >
 </div>
