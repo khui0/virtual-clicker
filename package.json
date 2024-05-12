@@ -42,6 +42,7 @@
   "type": "module",
   "dependencies": {
     "@fontsource-variable/figtree": "^5.0.21",
+    "@open-draft/deferred-promise": "^2.2.0",
     "dexie": "^4.0.4",
     "mathlive": "^0.98.6",
     "svelte-french-toast": "^1.2.0",

@@ -1,13 +1,25 @@
-<script>
+<script lang="ts">
   import { liveQuery } from "dexie";
   import { db } from "./db";
+  import type { Click } from "./db";
+  import { resubmission } from "./store";
 
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
   import BiListUl from "~icons/bi/list-ul";
   import BiArrowReturnLeft from "~icons/bi/arrow-return-left";
+  import { goto } from "$app/navigation";
 
   let history = liveQuery(() => db.history.toArray());
+
+  function resubmit(click: Click) {
+    resubmission.set({
+      mode: click.mode,
+      question: click.question,
+      response: click.response,
+    });
+    goto("/");
+  }
 </script>
 
 <div role="list" class="flex flex-col gap-2 overflow-auto flex-1 mb-2 styled-scrollbar">
@@ -43,6 +55,9 @@
         </div>
         <button
           class="absolute right-0 m-2 btn btn-neutral btn-square opacity-0 group-hover:opacity-100 transition-opacity"
+          on:click={() => {
+            resubmit(click);
+          }}
         >
           <BiArrowReturnLeft></BiArrowReturnLeft>
         </button>

@@ -1,14 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { settings } from "./store";
+  import { settings, resubmission } from "./store";
   import { click } from "./submit";
   import toast from "svelte-french-toast";
   import "mathlive";
   import { MathfieldElement } from "mathlive";
-
-  onMount(() => {
-    MathfieldElement.soundsDirectory = null;
-  });
+  import { DeferredPromise } from "@open-draft/deferred-promise";
 
   // Components
   import Modal from "./Modal.svelte";
@@ -17,6 +14,12 @@
   // Icons
   import BiQuestionCircle from "~icons/bi/question-circle";
   import BiX from "~icons/bi/x";
+
+  const mathfieldReady = new DeferredPromise();
+
+  onMount(() => {
+    MathfieldElement.soundsDirectory = null;
+  });
 
   const descriptions: { [key: string]: string } = {
     "a": "agree, true, yes",
@@ -37,11 +40,37 @@
     })();
 
   let questionInputValue: string;
-  let textarea: HTMLTextAreaElement;
+  let textareaValue: string;
   let mathfield: MathfieldElement;
 
   let mathfieldEnabled: boolean;
   let letter: string;
+
+  resubmission.subscribe(async (click) => {
+    if (click === null) return;
+    questionInputValue = click.question;
+    switch (click.mode) {
+      case "text": {
+        mathfieldEnabled = false;
+        letter = "";
+        textareaValue = click.response;
+        break;
+      }
+      case "math": {
+        mathfieldEnabled = true;
+        letter = "";
+        await mathfieldReady;
+        mathfield.value = click.response;
+        break;
+      }
+      case "letter": {
+        const match = click.response.match(/CHOICE ([A-E])/)?.[1].toLowerCase();
+        if (match) letter = match;
+        break;
+      }
+    }
+    resubmission.set(null);
+  });
 
   // Validate and set seat code
   function saveSeatCode(e: Event) {
@@ -70,11 +99,11 @@
     }
     switch (mode) {
       case "text": {
-        if (!textarea.value) {
+        if (!textareaValue) {
           toast.error("Response cannot be blank", { position: "bottom-center" });
           return;
         }
-        response = textarea.value;
+        response = textareaValue;
         break;
       }
       case "math": {
@@ -94,7 +123,7 @@
     toast.success("Response submitted!", { position: "bottom-center" });
     // Reset input fields
     questionInputValue = "";
-    if (textarea) textarea.value = "";
+    textareaValue = "";
     if (mathfield) mathfield.value = "";
     letter = "";
   }
@@ -130,7 +159,7 @@
           <textarea
             class="block textarea textarea-bordered resize-none w-full h-28"
             placeholder="Response"
-            bind:this={textarea}
+            bind:value={textareaValue}
           ></textarea>
         {:else}
           <math-field bind:this={mathfield}></math-field>
@@ -198,9 +227,5 @@
 
   math-field::part(content) {
     padding: 0;
-  }
-
-  :global(.toast) {
-    @apply bg-base-200 text-base-content;
   }
 </style>
