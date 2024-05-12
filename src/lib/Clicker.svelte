@@ -171,16 +171,16 @@
         <div class="btn btn-square swap-off fill-current"><BiCursorText></BiCursorText></div>
         <div class="btn btn-square swap-on fill-current"><BiPlusSlashMinus></BiPlusSlashMinus></div>
       </label>
-      <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="btn btn-square"><BiChevronDown></BiChevronDown></div>
+      <details class="dropdown dropdown-end">
+        <summary class="btn btn-square"><BiChevronDown></BiChevronDown></summary>
         <ul
           role="menu"
           tabindex="0"
-          class="dropdown-content menu z-[1] p-2 shadow bg-base-200 rounded-box w-52 mt-2 max-h-96 overflow-auto flex-nowrap styled-scrollbar"
+          class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52 mt-2 max-h-96 overflow-auto flex-nowrap styled-scrollbar"
         >
           <SymbolsList></SymbolsList>
         </ul>
-      </div>
+      </details>
     </div>
     <div>
       {#if letter === ""}
