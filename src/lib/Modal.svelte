@@ -1,6 +1,8 @@
 <script lang="ts">
   let modal: HTMLDialogElement;
 
+  import BiX from "~icons/bi/x";
+
   export function show() {
     modal.showModal();
   }
@@ -11,7 +13,7 @@
 <dialog class="modal" bind:this={modal}>
   <div class="modal-box">
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><BiX></BiX></button>
     </form>
     <div class="flex flex-col gap-2">
       <h3 class="font-bold text-lg">{title}</h3>

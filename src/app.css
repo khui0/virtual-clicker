@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .border-input {
+    @apply border border-[var(--fallback-bc,oklch(var(--bc)/0.2))];
+  }
+}
+
 html,
 body,
 #app,

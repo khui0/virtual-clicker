@@ -4,19 +4,38 @@
   import toast from "svelte-french-toast";
   import "mathlive";
 
+  // Components
   import Modal from "./Modal.svelte";
+  import LetterInput from "./LetterInput.svelte";
 
+  // Icons
   import BiQuestion from "~icons/bi/question";
-  import { text } from "@sveltejs/kit";
+  import BiX from "~icons/bi/x";
+
+  const descriptions: { [key: string]: string } = {
+    "a": "agree, true, yes",
+    "b": "disagree, false, no",
+    "c": "both, always",
+    "d": "neither, never",
+    "e": "sometimes, cannot be determined",
+  };
 
   let seatCodeModal: Modal;
   let seatCodeModalValue: string;
+
+  // Restrict seat code input to integers
+  $: seatCodeModalValue,
+    (() => {
+      seatCodeModalValue = parseInt(seatCodeModalValue).toString() || "";
+    })();
 
   let questionInputValue: string;
   let textareaValue: string;
 
   let mathfieldVisible: boolean;
+  let letter: string;
 
+  // Validate and set seat code
   function saveSeatCode(e: Event) {
     const regex: RegExp = /^[1-9][1-6][1-5]$/;
     if (regex.test(seatCodeModalValue)) {
@@ -28,6 +47,7 @@
     }
   }
 
+  // Validate and send click to forms
   function submitClick() {
     if (!questionInputValue) {
       toast.error("Question cannot be blank", { position: "bottom-center" });
@@ -65,28 +85,37 @@
         bind:value={questionInputValue}
       />
       <label class="flex flex-col items-center text-neutral-content text-sm">
-        Math
+        Equation
         <input type="checkbox" class="toggle" bind:checked={mathfieldVisible} />
       </label>
     </div>
     <div>
-      {#if !mathfieldVisible}
-        <textarea
-          class="block textarea textarea-bordered resize-none w-full h-28"
-          placeholder="Response"
-          bind:value={textareaValue}
-        ></textarea>
+      {#if letter === ""}
+        {#if !mathfieldVisible}
+          <textarea
+            class="block textarea textarea-bordered resize-none w-full h-28"
+            placeholder="Response"
+            bind:value={textareaValue}
+          ></textarea>
+        {:else}
+          <math-field></math-field>
+        {/if}
       {:else}
-        <math-field></math-field>
+        <div class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2">
+          <h3 class="w-8 h-8 border flex items-center justify-center rounded-full">
+            {letter?.toUpperCase() || ""}
+          </h3>
+          <p>Also means: {descriptions[letter]}</p>
+          <button
+            class="btn btn-sm btn-circle ml-auto"
+            on:click={() => {
+              letter = "";
+            }}><BiX></BiX></button
+          >
+        </div>
       {/if}
     </div>
-    <div class="join w-full">
-      <button class="btn btn-sm join-item flex-1">A</button>
-      <button class="btn btn-sm join-item flex-1">B</button>
-      <button class="btn btn-sm join-item flex-1">C</button>
-      <button class="btn btn-sm join-item flex-1">D</button>
-      <button class="btn btn-sm join-item flex-1">E</button>
-    </div>
+    <LetterInput bind:value={letter}></LetterInput>
     <button class="btn rounded-full" on:click={submitClick}>Submit</button>
   </div>
 
@@ -97,6 +126,7 @@
         class="input input-bordered w-full"
         placeholder="000"
         bind:value={seatCodeModalValue}
+        maxlength="3"
       />
       <a href="/" class="btn btn-square"><BiQuestion></BiQuestion></a>
     </div>
