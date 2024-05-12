@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { title } from "$lib/store";
   import Title from "$lib/Title.svelte";
-  import { onMount } from "svelte";
+
   import { Toaster } from "svelte-french-toast";
+  import RecentClicks from "$lib/RecentClicks.svelte";
 
   import BiList from "~icons/bi/list";
 
@@ -43,13 +45,15 @@
   </div>
   <div class="drawer-side">
     <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
-    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+    <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content">
       <div class="mb-5 mx-auto hidden lg:block">
         <Title></Title>
       </div>
       <li><a href="/">Clicker</a></li>
       <li><a href="/history">History</a></li>
       <li><a href="/settings">Settings</a></li>
+      <h2 class="text-xl font-bold my-2">Recent clicks</h2>
+      <RecentClicks></RecentClicks>
       <p class="text-neutral-content mt-auto">{version}</p>
     </ul>
   </div>
