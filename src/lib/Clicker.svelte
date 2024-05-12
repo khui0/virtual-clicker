@@ -174,8 +174,6 @@
       <details class="dropdown dropdown-end">
         <summary class="btn btn-square"><BiChevronDown></BiChevronDown></summary>
         <ul
-          role="menu"
-          tabindex="0"
           class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52 mt-2 max-h-96 overflow-auto flex-nowrap styled-scrollbar"
         >
           <SymbolsList></SymbolsList>
@@ -199,12 +197,14 @@
         <div
           class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2 bg-base-200"
         >
-          <h3 class="w-8 h-8 border flex items-center justify-center rounded-full">
+          <h3
+            class="w-8 h-8 border border-neutral-content flex items-center justify-center rounded-full"
+          >
             {letter?.toUpperCase() || ""}
           </h3>
           <p>Also means: {descriptions[letter]}</p>
           <button
-            class="btn btn-sm btn-circle ml-auto"
+            class="btn btn-sm btn-circle ml-auto shadow-none"
             on:click={() => {
               letter = "";
             }}><BiX></BiX></button
