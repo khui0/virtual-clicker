@@ -12,26 +12,32 @@
 <div role="list" class="flex flex-col gap-2 overflow-auto flex-1 mb-2 styled-scrollbar">
   {#if $history}
     {#each [...$history].reverse() as click}
-      <div class="flex flex-col border-input px-3 py-2 rounded-btn">
-        <div class="flex flex-row gap-2 items-center">
+      <div class="flex flex-row gap-2 items-center border-input px-3 py-2 rounded-btn">
+        <div class="flex flex-col gap-2 items-center w-11">
           <div class="badge badge-neutral">{click.code}</div>
-          <h3 class="flex-1">{click.question}</h3>
-          {#if click.mode === "text"}
-            <BiCursorText></BiCursorText>
-          {:else if click.mode === "math"}
-            <BiPlusSlashMinus></BiPlusSlashMinus>
-          {:else if click.mode === "letter"}
-            <BiListUl></BiListUl>
-          {/if}
-        </div>
-        <p>
-          <span class="text-neutral-content"
+          <span class="text-neutral-content text-xs text-nowrap"
             >{click.date.toLocaleTimeString("en-US", {
               timeStyle: "short",
-            })}</span
-          >
-          {click.response}
-        </p>
+            })}
+          </span>
+        </div>
+        <div class="flex flex-col flex-1 overflow-hidden">
+          <div class="flex flex-row gap-2 items-center min-w-0">
+            <h3 class="flex-1 overflow-hidden whitespace-nowrap text-ellipsis">
+              {click.question}
+            </h3>
+            {#if click.mode === "text"}
+              <BiCursorText></BiCursorText>
+            {:else if click.mode === "math"}
+              <BiPlusSlashMinus></BiPlusSlashMinus>
+            {:else if click.mode === "letter"}
+              <BiListUl></BiListUl>
+            {/if}
+          </div>
+          <p class="text-neutral-content overflow-hidden whitespace-nowrap text-ellipsis">
+            {click.response || "ERROR"}
+          </p>
+        </div>
       </div>
     {/each}
   {/if}
