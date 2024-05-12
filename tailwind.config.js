@@ -42,6 +42,8 @@ export default {
           "--tab-border": "1px",
           "--tab-radius": "0.5rem",
         },
+      },
+      {
         light: {
           primary: "#7e6bc9",
           "primary-content": "#2c2c2c",
