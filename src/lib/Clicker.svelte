@@ -39,7 +39,7 @@
   let textareaValue: string;
   let mathfield: MathfieldElement;
 
-  let mathfieldEnabled: boolean;
+  let mathfieldEnabled: boolean = $settings.equation_default === "true";
   let letter: string;
 
   onMount(() => {
