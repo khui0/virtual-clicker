@@ -15,7 +15,7 @@
   import LetterInput from "./LetterInput.svelte";
 
   // Icons
-  import BiQuestion from "~icons/bi/question";
+  import BiQuestionCircle from "~icons/bi/question-circle";
   import BiX from "~icons/bi/x";
 
   const descriptions: { [key: string]: string } = {
@@ -148,7 +148,7 @@
         maxlength="3"
         bind:value={codeModalValue}
       />
-      <a href="/" class="btn btn-square"><BiQuestion></BiQuestion></a>
+      <a href="/" class="btn btn-square"><BiQuestionCircle></BiQuestionCircle></a>
     </div>
     <form method="dialog" class="flex gap-2">
       <button class="btn btn-sm flex-1">Cancel</button>
