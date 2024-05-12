@@ -1,9 +1,14 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { settings } from "./store";
   import { click } from "./submit";
   import toast from "svelte-french-toast";
   import "mathlive";
-  import type { MathfieldElement } from "mathlive";
+  import { MathfieldElement } from "mathlive";
+
+  onMount(() => {
+    MathfieldElement.soundsDirectory = null;
+  });
 
   // Components
   import Modal from "./Modal.svelte";
