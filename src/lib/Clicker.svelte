@@ -3,6 +3,7 @@
   import { click } from "./submit";
   import toast from "svelte-french-toast";
   import "mathlive";
+  import type { MathfieldElement } from "mathlive";
 
   // Components
   import Modal from "./Modal.svelte";
@@ -20,6 +21,7 @@
     "e": "sometimes, cannot be determined",
   };
 
+  // Seat code modal
   let seatCodeModal: Modal;
   let seatCodeModalValue: string;
 
@@ -31,8 +33,9 @@
 
   let questionInputValue: string;
   let textareaValue: string;
+  let mathfield: MathfieldElement;
 
-  let mathfieldVisible: boolean;
+  let mathfieldEnabled: boolean;
   let letter: string;
 
   // Validate and set seat code
@@ -49,12 +52,19 @@
 
   // Validate and send click to forms
   function submitClick() {
+    const mode: "letter" | "math" | "text" =
+      letter === "" ? (mathfieldEnabled ? "math" : "text") : "letter";
+    console.log(mode);
     if (!questionInputValue) {
       toast.error("Question cannot be blank", { position: "bottom-center" });
       return;
     }
-    if (!textareaValue) {
+    if (mode === "text" && !textareaValue) {
       toast.error("Response cannot be blank", { position: "bottom-center" });
+      return;
+    }
+    if (mode === "math" && !mathfield.value) {
+      toast.error("Equation cannot be blank", { position: "bottom-center" });
       return;
     }
     click(questionInputValue, textareaValue);
@@ -86,19 +96,19 @@
       />
       <label class="flex flex-col items-center text-neutral-content text-sm">
         Equation
-        <input type="checkbox" class="toggle" bind:checked={mathfieldVisible} />
+        <input type="checkbox" class="toggle" bind:checked={mathfieldEnabled} />
       </label>
     </div>
     <div>
       {#if letter === ""}
-        {#if !mathfieldVisible}
+        {#if !mathfieldEnabled}
           <textarea
             class="block textarea textarea-bordered resize-none w-full h-28"
             placeholder="Response"
             bind:value={textareaValue}
           ></textarea>
         {:else}
-          <math-field></math-field>
+          <math-field bind:this={mathfield}></math-field>
         {/if}
       {:else}
         <div class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2">

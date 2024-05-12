@@ -6,10 +6,10 @@ settings.subscribe((value) => {
   code = value.code || "";
 });
 
-const URL: string = import.meta.env.FORM_URL;
-const codeField: string = import.meta.env.FORM_CODE;
-const questionField: string = import.meta.env.FORM_QUESTION;
-const answerField: string = import.meta.env.FORM_ANSWER;
+const URL: string = import.meta.env.VITE_FORM_URL;
+const codeField: string = import.meta.env.VITE_FORM_CODE;
+const questionField: string = import.meta.env.VITE_FORM_QUESTION;
+const answerField: string = import.meta.env.VITE_FORM_ANSWER;
 
 export function click(question: string, response: string) {
   if (!code) return;
