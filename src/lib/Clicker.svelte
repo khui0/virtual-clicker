@@ -173,11 +173,11 @@
       </label>
       <details class="dropdown dropdown-end">
         <summary class="btn btn-square focus"><BiChevronDown></BiChevronDown></summary>
-        <ul
-          class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52 mt-2 max-h-96 overflow-auto flex-nowrap styled-scrollbar"
-        >
-          <SymbolsList></SymbolsList>
-        </ul>
+        <div class="dropdown-content z-[1] shadow bg-base-200 rounded-box w-52 mt-1 overflow-hidden">
+          <ul class="menu max-h-96 p-2 overflow-auto flex-nowrap styled-scrollbar">
+            <SymbolsList></SymbolsList>
+          </ul>
+        </div>
       </details>
     </div>
     <div>
