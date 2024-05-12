@@ -49,7 +49,7 @@
       <div class="mb-5 mx-auto hidden lg:block">
         <Title></Title>
       </div>
-      <ul class="menu p-0 rounded-btn border-input">
+      <ul class="menu p-0 rounded-btn default-border">
         <li><a href="/"><BiInputCursorText></BiInputCursorText> Clicker</a></li>
         <li><a href="/history"><BiClockHistory></BiClockHistory> History</a></li>
         <li><a href="/settings"><BiGear></BiGear> Settings</a></li>

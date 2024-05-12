@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer utilities {
-  .border-input {
+  .default-border {
     @apply border border-[var(--fallback-bc,oklch(var(--bc)/0.2))];
   }
   .styled-scrollbar {

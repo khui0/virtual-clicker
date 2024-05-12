@@ -26,7 +26,7 @@
   {#if $history}
     {#each [...$history].reverse() as click}
       <div
-        class="flex flex-row gap-2 items-center border-input px-3 py-2 rounded-btn relative group"
+        class="flex flex-row gap-2 items-center default-border px-3 py-2 rounded-btn relative group"
       >
         <div class="flex flex-col gap-2 items-center w-11">
           <div class="badge badge-neutral">{click.code}</div>
