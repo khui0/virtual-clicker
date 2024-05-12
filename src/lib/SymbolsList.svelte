@@ -1,15 +1,27 @@
 <script lang="ts">
-  import symbols from "$lib/symbols.json";
+  import data from "$lib/symbols.json";
+  import { createEventDispatcher } from "svelte";
 
   interface Symbol {
-    alias: string;
+    alias: string[];
     string: string;
   }
+
+  const symbols: Symbol[] = data;
+
+  const dispatch = createEventDispatcher();
 </script>
 
 {#each symbols as symbol}
   <li>
-    <button class="inline-flex justify-between">
+    <button
+      class="inline-flex justify-between"
+      on:click={() => {
+        dispatch("click", {
+          string: symbol.string,
+        });
+      }}
+    >
       <span>{symbol.string}</span>
       <span>{symbol.alias.join(", ")}</span>
     </button>

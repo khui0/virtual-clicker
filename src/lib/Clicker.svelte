@@ -41,6 +41,7 @@
 
   let questionInputValue: string;
   let textareaValue: string;
+  let textarea: HTMLTextAreaElement;
   let mathfield: MathfieldElement;
 
   let mathfieldEnabled: boolean = $settings.equation_default === "true";
@@ -173,9 +174,22 @@
       </label>
       <details class="dropdown dropdown-end">
         <summary class="btn btn-square focus"><BiChevronDown></BiChevronDown></summary>
-        <div class="dropdown-content z-[1] shadow bg-base-200 rounded-box w-52 mt-1 overflow-hidden">
+        <div
+          class="dropdown-content z-[1] shadow bg-base-200 rounded-box w-52 mt-1 overflow-hidden"
+        >
           <ul class="menu max-h-96 p-2 overflow-auto flex-nowrap styled-scrollbar">
-            <SymbolsList></SymbolsList>
+            <SymbolsList
+              on:click={(e) => {
+                if (mathfieldEnabled) return;
+                textarea.setRangeText(
+                  e.detail.string,
+                  textarea.selectionStart,
+                  textarea.selectionEnd,
+                  "end",
+                );
+                textarea.focus();
+              }}
+            ></SymbolsList>
           </ul>
         </div>
       </details>
@@ -186,6 +200,7 @@
           <textarea
             class="block textarea textarea-bordered resize-none w-full h-28 bg-base-200"
             placeholder="Response"
+            bind:this={textarea}
             bind:value={textareaValue}
             on:keydown={submitKeybind}
           ></textarea>
