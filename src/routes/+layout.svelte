@@ -4,7 +4,7 @@
   import Title from "$lib/Title.svelte";
 
   import { Toaster } from "svelte-french-toast";
-  import RecentClicks from "$lib/RecentClicks.svelte";
+  import History from "$lib/History.svelte";
 
   import BiList from "~icons/bi/list";
   import BiInputCursorText from "~icons/bi/input-cursor-text";
@@ -54,7 +54,7 @@
         <li><a href="/settings"><BiGear></BiGear> Settings</a></li>
       </ul>
       <h2 class="text-xl font-bold my-2">Recent clicks</h2>
-      <RecentClicks></RecentClicks>
+      <History></History>
       <p class="text-neutral-content mt-auto">{version}</p>
     </div>
   </div>

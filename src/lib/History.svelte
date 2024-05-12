@@ -2,6 +2,10 @@
   import { liveQuery } from "dexie";
   import { db } from "./db";
 
+  import BiCursorText from "~icons/bi/cursor-text";
+  import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
+  import BiListUl from "~icons/bi/list-ul";
+
   let history = liveQuery(() => db.history.toArray());
 </script>
 
@@ -9,9 +13,16 @@
   {#if $history}
     {#each [...$history].reverse() as click}
       <div class="flex flex-col border-input px-3 py-2 rounded-btn">
-        <div class="flex flex-row gap-2">
+        <div class="flex flex-row gap-2 items-center">
           <div class="badge badge-neutral">{click.code}</div>
-          <h3>{click.question}</h3>
+          <h3 class="flex-1">{click.question}</h3>
+          {#if click.mode === "text"}
+            <BiCursorText></BiCursorText>
+          {:else if click.mode === "math"}
+            <BiPlusSlashMinus></BiPlusSlashMinus>
+          {:else if click.mode === "letter"}
+            <BiListUl></BiListUl>
+          {/if}
         </div>
         <p>
           <span class="text-neutral-content"

@@ -2,9 +2,9 @@
   import { title } from "$lib/store";
   title.set("History");
 
-  import HistoryList from "$lib/HistoryList.svelte";
+  import History from "$lib/History.svelte";
 </script>
 
 <div class="h-full">
-  <HistoryList></HistoryList>
+  <History></History>
 </div>
