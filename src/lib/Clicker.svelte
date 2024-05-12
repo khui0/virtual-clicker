@@ -223,7 +223,7 @@
 
 <style>
   math-field {
-    @apply w-full rounded-btn bg-base-100 text-base-content px-4 py-2 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] cursor-text;
+    @apply w-full rounded-btn bg-base-200 text-base-content px-4 py-2 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] cursor-text;
     --caret-color: theme(colors.base-content);
     --contains-highlight-background-color: theme(colors.primary);
     --text-font-family: "Figtree", sans-serif;
