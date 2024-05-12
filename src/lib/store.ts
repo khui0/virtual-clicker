@@ -3,6 +3,7 @@ import { browser } from "$app/environment";
 
 interface Settings {
   code?: string;
+  theme: string;
 }
 
 interface Resubmission {
@@ -11,10 +12,14 @@ interface Resubmission {
   response: string;
 }
 
+const initialSettings = browser && localStorage.getItem("settings");
+
 export const title: Writable<string> = writable("");
 
 export const settings: Writable<Settings> = writable(
-  JSON.parse((browser && localStorage.getItem("settings")) || "{}"),
+  (initialSettings && JSON.parse(initialSettings)) || {
+    theme: "auto",
+  },
 );
 
 settings.subscribe((value) => {

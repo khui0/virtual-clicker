@@ -2,6 +2,7 @@
   import { settings } from "$lib/store";
   import { title } from "$lib/store";
   title.set("Settings");
+  import toast from "svelte-french-toast";
 
   import SettingsField from "$lib/SettingsField.svelte";
 
@@ -15,26 +16,34 @@
     { value: "dark", name: "Dark" },
     { value: "light", name: "Light" },
   ];
+
+  let seatCodeInputValue: string = $settings.code || "";
+
+  // Validate and set seat code
+  function validateSeatCode(e: Event) {
+    const regex: RegExp = /^[1-9][1-6][1-5]$/;
+    if (regex.test(seatCodeInputValue)) {
+      $settings.code = seatCodeInputValue;
+      toast.success(`Seat code is now ${seatCodeInputValue}`, { position: "bottom-center" });
+    } else {
+      e.preventDefault();
+      toast.error("Seat code isn't possible", { position: "bottom-center" });
+    }
+  }
 </script>
 
 <div class="h-full flex flex-col gap-2">
   <SettingsField
     type="text"
     title="Seat code"
-    bind:value={$settings.code}
-    on:input={(e) => {
-      console.log(e.detail.value);
-    }}>Your 3-digit seat code</SettingsField
+    maxlength={3}
+    placeholder="000"
+    bind:value={seatCodeInputValue}
+    on:save={validateSeatCode}>Your 3-digit seat code</SettingsField
   >
-  <SettingsField type="select" title="Theme" options={themes}>Select a theme</SettingsField>
-  <SettingsField type="checkbox" title="Start in equation editor"
-    >Controls if equation input is enabled by default</SettingsField
+  <SettingsField type="select" title="Theme" options={themes} bind:value={$settings.theme}
+    >Select a theme</SettingsField
   >
-  <SettingsField type="select" title="Theme" options={themes}>Select a theme</SettingsField>
-  <SettingsField type="checkbox" title="Start in equation editor"
-    >Controls if equation input is enabled by default</SettingsField
-  >
-  <SettingsField type="select" title="Theme" options={themes}>Select a theme</SettingsField>
   <SettingsField type="checkbox" title="Start in equation editor"
     >Controls if equation input is enabled by default</SettingsField
   >

@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
 
+  import BiCheck from "~icons/bi/check";
+
   interface Option {
     name: string;
     value: string;
@@ -11,33 +13,23 @@
   export let value: string = "";
   export let checked: boolean = false;
   export let options: Option[] = [];
+  export let maxlength: number | undefined = undefined;
+  export let placeholder: string = "";
 
   const dispatch = createEventDispatcher();
-
-  let timeout: number;
-
-  function input() {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      dispatch("input", {
-        checked,
-        value,
-      });
-    }, 1000);
-  }
 </script>
 
 <div class="border-input rounded-btn p-2">
   <h2 class="font-bold mx-1">{title}</h2>
   {#if type === "checkbox"}
     <label class="label cursor-pointer items-start justify-normal gap-2">
-      <input type="checkbox" class="checkbox" bind:checked on:input={input} />
+      <input type="checkbox" class="checkbox" bind:checked />
       <span class="label-text text-neutral-content"><slot></slot></span>
     </label>
   {:else if type === "select"}
     <label class="label cursor-pointer flex-col items-start justify-normal gap-2">
       <span class="label-text text-neutral-content"><slot></slot></span>
-      <select class="select select-bordered select-sm w-full max-w-xs" bind:value on:input={input}>
+      <select class="select select-bordered select-sm w-full max-w-xs" bind:value>
         {#each options as option}
           <option value={option.value}>{option.name}</option>
         {/each}
@@ -46,12 +38,23 @@
   {:else if type === "text"}
     <label class="label cursor-pointer flex-col items-start justify-normal gap-2">
       <span class="label-text text-neutral-content"><slot></slot></span>
-      <input
-        type="text"
-        class="input input-bordered input-sm w-full max-w-xs"
-        bind:value
-        on:input={input}
-      />
+      <div class="flex flex-row gap-2">
+        <input
+          type="text"
+          class="input input-bordered input-sm w-full max-w-xs"
+          bind:value
+          {maxlength}
+          {placeholder}
+        />
+        <button
+          class="btn btn-sm btn-square"
+          on:click={() => {
+            dispatch("save", {
+              value,
+            });
+          }}><BiCheck></BiCheck></button
+        >
+      </div>
     </label>
   {/if}
 </div>

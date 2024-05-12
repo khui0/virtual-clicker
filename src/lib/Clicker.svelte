@@ -81,7 +81,7 @@
   function saveSeatCode(e: Event) {
     const regex: RegExp = /^[1-9][1-6][1-5]$/;
     if (regex.test(codeModalValue)) {
-      settings.set({ code: codeModalValue });
+      $settings.code = codeModalValue;
       toast.success(`Seat code is now ${codeModalValue}`, { position: "bottom-center" });
     } else {
       e.preventDefault();
