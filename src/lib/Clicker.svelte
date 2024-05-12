@@ -37,7 +37,7 @@
     })();
 
   let questionInputValue: string;
-  let textareaValue: string;
+  let textarea: HTMLTextAreaElement;
   let mathfield: MathfieldElement;
 
   let mathfieldEnabled: boolean;
@@ -59,6 +59,7 @@
   function submitClick() {
     const mode: "letter" | "math" | "text" =
       letter === "" ? (mathfieldEnabled ? "math" : "text") : "letter";
+    let response: string;
     if (!$settings?.code) {
       codeModal.show();
       return;
@@ -67,21 +68,35 @@
       toast.error("Question cannot be blank", { position: "bottom-center" });
       return;
     }
-    if (mode === "text" && !textareaValue) {
-      toast.error("Response cannot be blank", { position: "bottom-center" });
-      return;
+    switch (mode) {
+      case "text": {
+        if (!textarea.value) {
+          toast.error("Response cannot be blank", { position: "bottom-center" });
+          return;
+        }
+        response = textarea.value;
+        break;
+      }
+      case "math": {
+        if (!mathfield.value) {
+          toast.error("Equation cannot be blank", { position: "bottom-center" });
+          return;
+        }
+        response = mathfield.value;
+        break;
+      }
+      case "letter": {
+        response = "CHOICE " + letter.toUpperCase();
+        break;
+      }
     }
-    if (mode === "math" && !mathfield.value) {
-      toast.error("Equation cannot be blank", { position: "bottom-center" });
-      return;
-    }
-    click(questionInputValue, textareaValue, mode);
+    click(questionInputValue, response, mode);
     toast.success("Response submitted!", { position: "bottom-center" });
     // Reset input fields
     questionInputValue = "";
-    textareaValue = "";
+    if (textarea) textarea.value = "";
+    if (mathfield) mathfield.value = "";
     letter = "";
-    mathfield.value = "";
   }
 </script>
 
@@ -115,7 +130,7 @@
           <textarea
             class="block textarea textarea-bordered resize-none w-full h-28"
             placeholder="Response"
-            bind:value={textareaValue}
+            bind:this={textarea}
           ></textarea>
         {:else}
           <math-field bind:this={mathfield}></math-field>
