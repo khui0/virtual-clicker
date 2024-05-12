@@ -72,6 +72,8 @@
     // Reset input fields
     questionInputValue = "";
     textareaValue = "";
+    letter = "";
+    mathfield.value = "";
   }
 </script>
 
