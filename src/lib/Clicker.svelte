@@ -166,13 +166,13 @@
         class="input input-bordered w-full bg-base-200"
         bind:value={questionInputValue}
       />
-      <label class="swap swap-rotate">
-        <input type="checkbox" bind:checked={mathfieldEnabled} />
-        <div class="btn btn-square swap-off fill-current"><BiCursorText></BiCursorText></div>
-        <div class="btn btn-square swap-on fill-current"><BiPlusSlashMinus></BiPlusSlashMinus></div>
+      <label class="swap swap-rotate btn btn-square">
+        <input type="checkbox" class="outline-none" bind:checked={mathfieldEnabled} />
+        <div class="swap-off fill-current"><BiCursorText></BiCursorText></div>
+        <div class="swap-on fill-current"><BiPlusSlashMinus></BiPlusSlashMinus></div>
       </label>
       <details class="dropdown dropdown-end">
-        <summary class="btn btn-square"><BiChevronDown></BiChevronDown></summary>
+        <summary class="btn btn-square focus"><BiChevronDown></BiChevronDown></summary>
         <ul
           class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52 mt-2 max-h-96 overflow-auto flex-nowrap styled-scrollbar"
         >

@@ -9,6 +9,14 @@
   .styled-scrollbar {
     @apply scrollbar-thin scrollbar-thumb-base-300 hover:scrollbar-thumb-primary scrollbar-track-transparent;
   }
+  .btn:focus,
+  .btn:focus-within {
+    box-shadow: none;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
+    outline-color: var(--fallback-bc, oklch(var(--bc) / 0.2));
+  }
 }
 
 html,
