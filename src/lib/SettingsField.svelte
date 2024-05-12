@@ -1,0 +1,57 @@
+<script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
+  interface Option {
+    name: string;
+    value: string;
+  }
+
+  export let title: string;
+  export let type: "checkbox" | "select" | "text";
+  export let value: string = "";
+  export let checked: boolean = false;
+  export let options: Option[] = [];
+
+  const dispatch = createEventDispatcher();
+
+  let timeout: number;
+
+  function input() {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      dispatch("input", {
+        checked,
+        value,
+      });
+    }, 1000);
+  }
+</script>
+
+<div class="border-input rounded-btn p-2">
+  <h2 class="font-bold mx-1">{title}</h2>
+  {#if type === "checkbox"}
+    <label class="label cursor-pointer items-start justify-normal gap-2">
+      <input type="checkbox" class="checkbox" bind:checked on:input={input} />
+      <span class="label-text text-neutral-content"><slot></slot></span>
+    </label>
+  {:else if type === "select"}
+    <label class="label cursor-pointer flex-col items-start justify-normal gap-2">
+      <span class="label-text text-neutral-content"><slot></slot></span>
+      <select class="select select-bordered select-sm w-full max-w-xs" bind:value on:input={input}>
+        {#each options as option}
+          <option value={option.value}>{option.name}</option>
+        {/each}
+      </select>
+    </label>
+  {:else if type === "text"}
+    <label class="label cursor-pointer flex-col items-start justify-normal gap-2">
+      <span class="label-text text-neutral-content"><slot></slot></span>
+      <input
+        type="text"
+        class="input input-bordered input-sm w-full max-w-xs"
+        bind:value
+        on:input={input}
+      />
+    </label>
+  {/if}
+</div>

@@ -31,7 +31,7 @@
 <div class="drawer lg:drawer-open min-h-full">
   <input id="sidebar" type="checkbox" class="drawer-toggle" bind:checked={sidebarVisible} />
   <div class="drawer-content flex flex-col relative">
-    <div class="m-3 flex flex-row gap-4 items-center lg:hidden">
+    <div class="p-3 flex flex-row gap-4 items-center lg:hidden sticky top-0 bg-base-100 z-10">
       <button
         class="btn btn-square"
         on:click={() => {
@@ -42,7 +42,7 @@
     </div>
     <div class="p-5 pt-0 lg:pt-5 h-full"><slot></slot></div>
   </div>
-  <div class="drawer-side">
+  <div class="drawer-side z-20">
     <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
     <div class="flex flex-col p-4 w-80 h-full bg-base-200 text-base-content">
       <div class="mb-5 mx-auto hidden lg:block">
