@@ -154,7 +154,7 @@
       <input
         type="text"
         placeholder="Question"
-        class="input input-bordered w-full"
+        class="input input-bordered w-full bg-base-200"
         bind:value={questionInputValue}
       />
       <label class="swap swap-rotate">
@@ -177,7 +177,7 @@
       {#if letter === ""}
         {#if !mathfieldEnabled}
           <textarea
-            class="block textarea textarea-bordered resize-none w-full h-28"
+            class="block textarea textarea-bordered resize-none w-full h-28 bg-base-200"
             placeholder="Response"
             bind:value={textareaValue}
           ></textarea>
