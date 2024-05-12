@@ -17,10 +17,6 @@
 
   const mathfieldReady = new DeferredPromise();
 
-  onMount(() => {
-    MathfieldElement.soundsDirectory = null;
-  });
-
   const descriptions: { [key: string]: string } = {
     "a": "agree, true, yes",
     "b": "disagree, false, no",
@@ -45,6 +41,15 @@
 
   let mathfieldEnabled: boolean;
   let letter: string;
+
+  onMount(() => {
+    // Remove Mathfield sounds
+    MathfieldElement.soundsDirectory = null;
+    // Prompt user to enter seat code
+    if (!$settings.code) {
+      codeModal.show();
+    }
+  });
 
   resubmission.subscribe(async (click) => {
     if (click === null) return;
