@@ -137,7 +137,7 @@
 <div class="flex items-center justify-center h-full">
   <div class="flex flex-col gap-2 w-[min(100%,600px)]">
     <h2
-      class="text-3xl font-bold text-neutral-content cursor-pointer w-fit"
+      class="text-3xl font-bold cursor-pointer w-fit"
       role="presentation"
       on:click={() => {
         codeModal.show();
