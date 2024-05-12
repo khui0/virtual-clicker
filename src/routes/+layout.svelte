@@ -10,6 +10,7 @@
   import BiInputCursorText from "~icons/bi/input-cursor-text";
   import BiGear from "~icons/bi/gear";
   import BiClockHistory from "~icons/bi/clock-history";
+  import { goto } from "$app/navigation";
 
   const version: string = import.meta.env.PACKAGE_VERSION;
 
@@ -21,6 +22,19 @@
       const active = document.activeElement?.tagName;
       if (e.key == "Escape" && active === "BODY") {
         sidebarVisible = !sidebarVisible;
+      }
+    });
+
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      const macos = navigator.userAgent.indexOf("Mac OS X") !== -1;
+      const control = macos ? e.metaKey : e.ctrlKey;
+      e.preventDefault();
+      if (control && e.key === ",") {
+        goto("/settings");
+      } else if (control && e.key === ".") {
+        goto("/history");
+      } else if (control && e.key === "Escape") {
+        goto("/");
       }
     });
   });
