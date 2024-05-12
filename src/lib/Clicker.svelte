@@ -27,13 +27,13 @@
   };
 
   // Seat code modal
-  let seatCodeModal: Modal;
-  let seatCodeModalValue: string;
+  let codeModal: Modal;
+  let codeModalValue: string;
 
-  // Restrict seat code input to integers
-  $: seatCodeModalValue,
+  // Restrict code input to integers
+  $: codeModalValue,
     (() => {
-      seatCodeModalValue = parseInt(seatCodeModalValue).toString() || "";
+      codeModalValue = (parseInt(codeModalValue) || "").toString();
     })();
 
   let questionInputValue: string;
@@ -46,9 +46,9 @@
   // Validate and set seat code
   function saveSeatCode(e: Event) {
     const regex: RegExp = /^[1-9][1-6][1-5]$/;
-    if (regex.test(seatCodeModalValue)) {
-      settings.set({ code: seatCodeModalValue });
-      toast.success(`Seat code is now ${seatCodeModalValue}`, { position: "bottom-center" });
+    if (regex.test(codeModalValue)) {
+      settings.set({ code: codeModalValue });
+      toast.success(`Seat code is now ${codeModalValue}`, { position: "bottom-center" });
     } else {
       e.preventDefault();
       toast.error("Seat code isn't possible", { position: "bottom-center" });
@@ -59,7 +59,10 @@
   function submitClick() {
     const mode: "letter" | "math" | "text" =
       letter === "" ? (mathfieldEnabled ? "math" : "text") : "letter";
-    console.log(mode);
+    if (!$settings?.code) {
+      codeModal.show();
+      return;
+    }
     if (!questionInputValue) {
       toast.error("Question cannot be blank", { position: "bottom-center" });
       return;
@@ -88,8 +91,8 @@
       class="text-3xl font-bold text-neutral-content cursor-pointer w-fit"
       role="presentation"
       on:click={() => {
-        seatCodeModal.show();
-        seatCodeModalValue = $settings?.code || "";
+        codeModal.show();
+        codeModalValue = $settings?.code || "";
       }}
     >
       {$settings?.code || "000"}
@@ -136,14 +139,14 @@
     <button class="btn rounded-full" on:click={submitClick}>Submit</button>
   </div>
 
-  <Modal title="Seat code" bind:this={seatCodeModal}>
+  <Modal title="Seat code" bind:this={codeModal}>
     <div class="flex flex-row gap-2">
       <input
         type="text"
         class="input input-bordered w-full"
         placeholder="000"
-        bind:value={seatCodeModalValue}
         maxlength="3"
+        bind:value={codeModalValue}
       />
       <a href="/" class="btn btn-square"><BiQuestion></BiQuestion></a>
     </div>
