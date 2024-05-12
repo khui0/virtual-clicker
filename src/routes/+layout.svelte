@@ -25,11 +25,7 @@
 </script>
 
 <svelte:head>
-  {#if $title}
-    <title>Virtual Clicker - {$title}</title>
-  {:else}
-    <title>Virtual Clicker</title>
-  {/if}
+  <title>Virtual Clicker {$title ? "- " + $title : ""}</title>
 </svelte:head>
 
 <div class="drawer lg:drawer-open min-h-full">
