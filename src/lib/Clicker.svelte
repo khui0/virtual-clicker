@@ -136,6 +136,15 @@
     if (mathfield) mathfield.value = "";
     letter = "";
   }
+
+  function submitKeybind(e: KeyboardEvent) {
+    const macos = navigator.userAgent.indexOf("Mac OS X") !== -1;
+    const control = macos ? e.metaKey : e.ctrlKey;
+    if (control && e.key === "Enter") {
+      e.preventDefault();
+      submitClick();
+    }
+  }
 </script>
 
 <div class="flex items-center justify-center h-full">
@@ -180,12 +189,16 @@
             class="block textarea textarea-bordered resize-none w-full h-28 bg-base-200"
             placeholder="Response"
             bind:value={textareaValue}
+            on:keydown={submitKeybind}
           ></textarea>
         {:else}
-          <math-field bind:this={mathfield}></math-field>
+          <math-field role="presentation" bind:this={mathfield} on:keydown={submitKeybind}
+          ></math-field>
         {/if}
       {:else}
-        <div class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2 bg-base-200">
+        <div
+          class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2 bg-base-200"
+        >
           <h3 class="w-8 h-8 border flex items-center justify-center rounded-full">
             {letter?.toUpperCase() || ""}
           </h3>

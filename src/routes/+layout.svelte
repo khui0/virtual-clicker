@@ -16,8 +16,10 @@
   let sidebarVisible: boolean;
 
   onMount(() => {
+    // Keybinds
     document.addEventListener("keyup", (e: KeyboardEvent) => {
-      if (e.key == "Escape") {
+      const active = document.activeElement?.tagName;
+      if (e.key == "Escape" && active === "BODY") {
         sidebarVisible = !sidebarVisible;
       }
     });
