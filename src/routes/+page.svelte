@@ -1,9 +1,14 @@
 <script lang="ts">
-  import { title, settings } from "$lib/store";
+  import { settings } from "$lib/store";
   import Clicker from "$lib/Clicker.svelte";
 
   settings.subscribe(() => {
-    title.set($settings.code && $settings.show_code_in_title === "true" ? `${$settings.code}` : "");
+    if ($settings.code) {
+      document.title =
+        $settings.show_code_in_title === "true"
+          ? `Virtual Clicker - ${$settings.code}`
+          : "Virtual Clicker";
+    }
   });
 </script>
 

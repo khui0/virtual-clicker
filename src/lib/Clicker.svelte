@@ -10,10 +10,14 @@
   // Components
   import Modal from "./Modal.svelte";
   import LetterInput from "./LetterInput.svelte";
+  import SymbolsList from "./SymbolsList.svelte";
 
   // Icons
   import BiQuestionCircle from "~icons/bi/question-circle";
   import BiX from "~icons/bi/x";
+  import BiCursorText from "~icons/bi/cursor-text";
+  import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
+  import BiChevronDown from "~icons/bi/chevron-down";
 
   const mathfieldReady = new DeferredPromise();
 
@@ -153,10 +157,21 @@
         class="input input-bordered w-full"
         bind:value={questionInputValue}
       />
-      <label class="flex flex-col items-center text-neutral-content text-sm">
-        Equation
-        <input type="checkbox" class="toggle" bind:checked={mathfieldEnabled} />
+      <label class="swap swap-rotate">
+        <input type="checkbox" bind:checked={mathfieldEnabled} />
+        <div class="btn btn-square swap-off fill-current"><BiCursorText></BiCursorText></div>
+        <div class="btn btn-square swap-on fill-current"><BiPlusSlashMinus></BiPlusSlashMinus></div>
       </label>
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-square"><BiChevronDown></BiChevronDown></div>
+        <ul
+          role="menu"
+          tabindex="0"
+          class="dropdown-content menu z-[1] p-2 shadow bg-base-200 rounded-box w-52 mt-2 max-h-96 overflow-auto flex-nowrap styled-scrollbar"
+        >
+          <SymbolsList></SymbolsList>
+        </ul>
+      </div>
     </div>
     <div>
       {#if letter === ""}
