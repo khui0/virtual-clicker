@@ -67,7 +67,7 @@
       toast.error("Equation cannot be blank", { position: "bottom-center" });
       return;
     }
-    click(questionInputValue, textareaValue);
+    click(questionInputValue, textareaValue, mode);
     toast.success("Response submitted!", { position: "bottom-center" });
     // Reset input fields
     questionInputValue = "";

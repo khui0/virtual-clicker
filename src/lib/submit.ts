@@ -1,4 +1,7 @@
 import { settings } from "./store";
+import { db } from "./db";
+
+type Mode = "letter" | "math" | "text";
 
 let code: string;
 
@@ -11,7 +14,7 @@ const codeField: string = import.meta.env.VITE_FORM_CODE;
 const questionField: string = import.meta.env.VITE_FORM_QUESTION;
 const answerField: string = import.meta.env.VITE_FORM_ANSWER;
 
-export function click(question: string, response: string) {
+export function click(question: string, response: string, mode: Mode) {
   if (!code) return;
   const fields = {
     [codeField]: code,
@@ -26,4 +29,21 @@ export function click(question: string, response: string) {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
+  storeClick(code, question, response, mode);
+}
+
+async function storeClick(code: string, question: string, response: string, mode: Mode) {
+  try {
+    const id = await db.history.add({
+      code,
+      mode,
+      question,
+      response,
+      date: new Date(),
+    });
+
+    console.log(id);
+  } catch (error) {
+    console.error(error);
+  }
 }
