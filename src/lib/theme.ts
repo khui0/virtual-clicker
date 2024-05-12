@@ -17,7 +17,6 @@ settings.subscribe((settings) => {
 // Update theme
 function updateTheme(theme: string) {
   if (!browser) return;
-  console.log("hi");
   // Detect system theme
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   if (theme === "auto") {
