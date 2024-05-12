@@ -7,6 +7,9 @@
   import RecentClicks from "$lib/RecentClicks.svelte";
 
   import BiList from "~icons/bi/list";
+  import BiInputCursorText from "~icons/bi/input-cursor-text";
+  import BiGear from "~icons/bi/gear";
+  import BiClockHistory from "~icons/bi/clock-history";
 
   const version: string = import.meta.env.PACKAGE_VERSION;
 
@@ -45,17 +48,19 @@
   </div>
   <div class="drawer-side">
     <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
-    <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content">
+    <div class="flex flex-col p-4 w-80 h-full bg-base-200 text-base-content">
       <div class="mb-5 mx-auto hidden lg:block">
         <Title></Title>
       </div>
-      <li><a href="/">Clicker</a></li>
-      <li><a href="/history">History</a></li>
-      <li><a href="/settings">Settings</a></li>
+      <ul class="menu p-0 rounded-btn border-input">
+        <li><a href="/"><BiInputCursorText></BiInputCursorText> Clicker</a></li>
+        <li><a href="/history"><BiClockHistory></BiClockHistory> History</a></li>
+        <li><a href="/settings"><BiGear></BiGear> Settings</a></li>
+      </ul>
       <h2 class="text-xl font-bold my-2">Recent clicks</h2>
       <RecentClicks></RecentClicks>
       <p class="text-neutral-content mt-auto">{version}</p>
-    </ul>
+    </div>
   </div>
 </div>
 

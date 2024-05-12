@@ -5,7 +5,7 @@
   let history = liveQuery(() => db.history.toArray());
 </script>
 
-<div role="list" class="flex flex-col gap-2 overflow-auto flex-1">
+<div role="list" class="flex flex-col gap-2 overflow-auto flex-1 mb-2">
   {#if $history}
     {#each [...$history].reverse() as click}
       <div class="flex flex-col border-input px-3 py-2 rounded-btn">
