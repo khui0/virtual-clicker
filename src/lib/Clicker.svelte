@@ -185,7 +185,7 @@
           <math-field bind:this={mathfield}></math-field>
         {/if}
       {:else}
-        <div class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2">
+        <div class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2 bg-base-200">
           <h3 class="w-8 h-8 border flex items-center justify-center rounded-full">
             {letter?.toUpperCase() || ""}
           </h3>
