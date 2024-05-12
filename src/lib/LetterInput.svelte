@@ -4,10 +4,10 @@
   export let value: string = "";
 </script>
 
-<div class="join w-full">
+<div class="join w-full shadow-sm">
   {#each letters as letter}
     <button
-      class="btn btn-sm join-item flex-1"
+      class="btn btn-sm join-item flex-1 shadow-none"
       on:click={() => {
         value = letter;
       }}>{letter.toUpperCase()}</button

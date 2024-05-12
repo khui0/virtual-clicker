@@ -62,7 +62,7 @@
           {placeholder}
         />
         <button
-          class="btn btn-sm btn-square"
+          class="btn btn-sm btn-square shadow-none"
           on:click={() => {
             dispatch("save", {
               value,
