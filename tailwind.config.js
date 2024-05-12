@@ -20,11 +20,11 @@ export default {
     themes: [
       {
         dark: {
-          primary: "#7e6bc9",
+          primary: "#479df8",
           "primary-content": "#ffffff",
-          secondary: "#523ff4",
+          secondary: "#479df8",
           "secondary-content": "#ffffff",
-          accent: "#7e6bc9",
+          accent: "#479df8",
           neutral: "#3f3f3f",
           "neutral-content": "#cfcfcf",
           "base-100": "#181818",
@@ -43,11 +43,11 @@ export default {
           "--tab-radius": "0.5rem",
         },
         light: {
-          primary: "#7e6bc9",
+          primary: "#479df8",
           "primary-content": "#2c2c2c",
-          secondary: "#523ff4",
+          secondary: "#479df8",
           "secondary-content": "#2c2c2c",
-          accent: "#7e6bc9",
+          accent: "#479df8",
           neutral: "#dcdcdc",
           "neutral-content": "#525252",
           "base-100": "#eeeeee",
