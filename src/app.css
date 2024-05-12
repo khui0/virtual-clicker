@@ -6,6 +6,9 @@
   .border-input {
     @apply border border-[var(--fallback-bc,oklch(var(--bc)/0.2))];
   }
+  .styled-scrollbar {
+    @apply scrollbar-thin scrollbar-thumb-base-300 hover:scrollbar-thumb-primary scrollbar-track-transparent;
+  }
 }
 
 html,
@@ -16,6 +19,6 @@ main {
 }
 
 html {
-  @apply scrollbar-thin scrollbar-thumb-base-200 hover:scrollbar-thumb-primary scrollbar-track-transparent;
+  @apply styled-scrollbar;
   font-family: "Figtree Variable", sans-serif;
 }
