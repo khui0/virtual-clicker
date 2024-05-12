@@ -34,15 +34,13 @@ export function click(question: string, response: string, mode: Mode) {
 
 async function storeClick(code: string, question: string, response: string, mode: Mode) {
   try {
-    const id = await db.history.add({
+    await db.history.add({
       code,
       mode,
       question,
       response,
       date: new Date(),
     });
-
-    console.log(id);
   } catch (error) {
     console.error(error);
   }
