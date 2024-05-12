@@ -50,4 +50,10 @@
     bind:value={$settings.equation_default}
     >Controls if equation input is enabled by default</SettingsField
   >
+  <SettingsField
+    type="checkbox"
+    title="Show seat code in title"
+    bind:value={$settings.show_code_in_title}
+    >Controls if seat code is shown in window title</SettingsField
+  >
 </div>

@@ -1,13 +1,8 @@
 <script lang="ts">
-  import { title } from "$lib/store";
+  import { title, settings } from "$lib/store";
   import Clicker from "$lib/Clicker.svelte";
 
-  title.set("");
+  title.set($settings.show_code_in_title === "true" ? `${$settings.code}` : "");
 </script>
-
-<svelte:head>
-  <title>Virtual Clicker</title>
-  <meta name="description" content="Student Response System" />
-</svelte:head>
 
 <Clicker></Clicker>

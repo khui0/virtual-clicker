@@ -26,6 +26,7 @@
 
 <svelte:head>
   <title>Virtual Clicker {$title ? "- " + $title : ""}</title>
+  <meta name="description" content="Student Response System" />
 </svelte:head>
 
 <div class="drawer lg:drawer-open min-h-full">

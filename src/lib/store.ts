@@ -15,9 +15,11 @@ const initialSettings = browser && localStorage.getItem("settings");
 
 export const title: Writable<string> = writable("");
 
+// Initialize store with default settings
 export const settings: Writable<Settings> = writable(
   (initialSettings && JSON.parse(initialSettings)) || {
     theme: "auto",
+    show_code_in_title: "true",
   },
 );
 
