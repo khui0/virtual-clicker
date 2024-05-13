@@ -68,11 +68,20 @@
       <div class="mb-5 mx-auto hidden lg:block">
         <Title></Title>
       </div>
-      <ul class="menu p-0 rounded-btn default-border">
-        <li><a href="/"><BiInputCursorText></BiInputCursorText> Clicker</a></li>
-        <li><a href="/history"><BiClockHistory></BiClockHistory> History</a></li>
-        <li><a href="/settings"><BiGear></BiGear> Settings</a></li>
-      </ul>
+      <div class="grid grid-cols-2 gap-2" role="menu">
+        <a href="/" class="btn default-border shadow-none">
+          <span class="text-xl"><BiInputCursorText></BiInputCursorText></span>
+          <span class="font-normal">Clicker</span>
+        </a>
+        <a href="/history" class="btn default-border shadow-none">
+          <span class="text-xl"><BiClockHistory></BiClockHistory></span>
+          <span class="font-normal">History</span>
+        </a>
+        <a href="/settings" class="btn default-border shadow-none">
+          <span class="text-xl"><BiGear></BiGear></span>
+          <span class="font-normal">Settings</span>
+        </a>
+      </div>
       <h2 class="text-xl font-bold my-2">Recent clicks</h2>
       <History></History>
       <p class="text-neutral-content mt-auto">{version}</p>
