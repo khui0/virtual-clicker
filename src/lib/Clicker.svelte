@@ -164,7 +164,7 @@
       <input
         type="text"
         placeholder="Question"
-        class="input input-bordered w-full bg-base-200"
+        class="input input-bordered w-full bg-base-200 shadow-sm"
         bind:value={questionInputValue}
       />
       <label class="swap swap-rotate btn btn-square">
@@ -198,7 +198,7 @@
       {#if letter === ""}
         {#if !mathfieldEnabled}
           <textarea
-            class="block textarea textarea-bordered resize-none w-full h-28 bg-base-200"
+            class="block textarea textarea-bordered resize-none w-full h-28 bg-base-200 shadow-sm"
             placeholder="Response"
             bind:this={textarea}
             bind:value={textareaValue}
@@ -210,7 +210,7 @@
         {/if}
       {:else}
         <div
-          class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2 bg-base-200"
+          class="textarea textarea-bordered rounded-btn py-4 flex flex-row items-center gap-2 bg-base-200 shadow-sm"
         >
           <h3
             class="w-8 h-8 border border-neutral-content flex items-center justify-center rounded-full"
@@ -251,7 +251,7 @@
 
 <style>
   math-field {
-    @apply w-full rounded-btn bg-base-200 text-base-content px-4 py-2 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] cursor-text;
+    @apply w-full rounded-btn bg-base-200 text-base-content px-4 py-2 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] cursor-text shadow-sm;
     --caret-color: theme(colors.base-content);
     --contains-highlight-background-color: theme(colors.primary);
     --text-font-family: "Figtree", sans-serif;
