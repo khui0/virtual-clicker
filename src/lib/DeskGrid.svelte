@@ -21,10 +21,12 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<div class="grid grid-cols-6 place-items-center w-fit min-w-fit gap-x-16 gap-y-6">
+<div
+  class="grid grid-cols-6 place-items-center w-fit min-w-fit gap-x-8 gap-y-3 sm:gap-x-16 sm:gap-y-6"
+>
   {#each seats as seat}
     <button
-      class="w-16 text-base-300 drop-shadow-sm hover:text-neutral active:scale-95 transition-all"
+      class="w-8 sm:w-16 text-base-300 drop-shadow-sm hover:text-neutral active:scale-95 transition-all"
       on:click={() => {
         dispatch("select", {
           col: seat.col,

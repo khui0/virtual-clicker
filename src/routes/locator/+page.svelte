@@ -1,7 +1,7 @@
 <script lang="ts">
   import { settings, title } from "$lib/store";
   import toast from "svelte-french-toast";
-  title.set("Code Locator");
+  title.set("Locator");
 
   import DeskGrid from "$lib/DeskGrid.svelte";
 
