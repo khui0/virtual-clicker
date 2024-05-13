@@ -39,7 +39,8 @@
     maxlength={3}
     placeholder="000"
     bind:value={seatCodeInputValue}
-    on:save={validateSeatCode}>Your 3-digit seat code</SettingsField
+    on:save={validateSeatCode}
+    >Your 3-digit seat code. <a href="/locator" class="link">Need help?</a></SettingsField
   >
   <SettingsField type="select" title="Theme" options={themes} bind:value={$settings.theme}
     >Select a theme</SettingsField

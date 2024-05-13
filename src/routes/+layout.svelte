@@ -28,12 +28,15 @@
     document.addEventListener("keydown", (e: KeyboardEvent) => {
       const macos = navigator.userAgent.indexOf("Mac OS X") !== -1;
       const control = macos ? e.metaKey : e.ctrlKey;
-      e.preventDefault();
+
       if (control && e.key === ",") {
+        e.preventDefault();
         goto("/settings");
       } else if (control && e.key === ".") {
+        e.preventDefault();
         goto("/history");
       } else if (control && e.key === "Escape") {
+        e.preventDefault();
         goto("/");
       }
     });

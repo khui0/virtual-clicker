@@ -177,7 +177,7 @@
         <div
           class="dropdown-content z-[1] shadow bg-base-200 rounded-box w-52 mt-1 overflow-hidden"
         >
-          <ul class="menu max-h-96 p-2 overflow-auto flex-nowrap styled-scrollbar">
+          <ul class="menu max-h-80 p-2 overflow-auto flex-nowrap styled-scrollbar">
             <SymbolsList
               on:click={(e) => {
                 if (mathfieldEnabled) return;
@@ -240,7 +240,7 @@
         maxlength="3"
         bind:value={codeModalValue}
       />
-      <a href="/" class="btn btn-square"><BiQuestionCircle></BiQuestionCircle></a>
+      <a href="/locator" class="btn btn-square"><BiQuestionCircle></BiQuestionCircle></a>
     </div>
     <form method="dialog" class="flex gap-2">
       <button class="btn btn-sm flex-1">Cancel</button>
