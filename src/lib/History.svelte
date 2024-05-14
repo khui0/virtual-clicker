@@ -3,13 +3,15 @@
   import { db } from "./db";
   import type { Click } from "./db";
   import { resubmission } from "./store";
-  import { convertLatexToMarkup, renderMathInDocument } from "mathlive";
+  import { convertLatexToMarkup, renderMathInDocument, renderMathInElement } from "mathlive";
 
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
   import BiListUl from "~icons/bi/list-ul";
   import BiArrowReturnLeft from "~icons/bi/arrow-return-left";
   import { goto } from "$app/navigation";
+
+  let list: HTMLDivElement;
 
   let history = liveQuery(() => db.history.toArray());
 
@@ -23,11 +25,15 @@
   }
 
   history.subscribe(() => {
-    renderMathInDocument();
+    renderMathInElement(list);
   });
 </script>
 
-<div role="list" class="flex flex-col gap-2 overflow-auto flex-1 mb-2 styled-scrollbar">
+<div
+  role="list"
+  class="flex flex-col gap-2 overflow-auto flex-1 mb-2 styled-scrollbar"
+  bind:this={list}
+>
   {#if $history && $history.length > 0}
     {#each [...$history].reverse() as click}
       <div
