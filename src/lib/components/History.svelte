@@ -4,12 +4,15 @@
   import type { Click } from "$lib/db";
   import { resubmission } from "$lib/store";
   import * as mathlive from "mathlive";
+  import { createEventDispatcher } from "svelte";
+  import { goto } from "$app/navigation";
 
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
   import BiListUl from "~icons/bi/list-ul";
   import BiArrowReturnLeft from "~icons/bi/arrow-return-left";
-  import { goto } from "$app/navigation";
+
+  const dispatch = createEventDispatcher();
 
   let list: HTMLDivElement;
 
@@ -78,6 +81,7 @@
           class="absolute right-0 m-2 btn btn-neutral btn-square opacity-0 group-hover:opacity-100 transition-opacity"
           on:click={() => {
             resubmit(click);
+            dispatch("resubmit");
           }}
         >
           <BiArrowReturnLeft></BiArrowReturnLeft>
