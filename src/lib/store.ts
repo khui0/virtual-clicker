@@ -5,7 +5,7 @@ interface Settings {
   [key: string]: string;
 }
 
-interface Resubmission {
+export interface Resubmission {
   mode: "letter" | "math" | "text";
   question: string;
   response: string;

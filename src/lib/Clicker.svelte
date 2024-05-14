@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { settings, resubmission } from "./store";
+  import { settings, resubmission, type Resubmission } from "./store";
   import { click } from "./submit";
   import toast from "svelte-french-toast";
   import "mathlive";
@@ -17,6 +17,7 @@
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
   import BiChevronDown from "~icons/bi/chevron-down";
+  import { get } from "svelte/store";
 
   const descriptions: { [key: string]: string } = {
     "a": "agree, true, yes",
@@ -52,30 +53,33 @@
     }
   });
 
-  resubmission.subscribe((click) => {
-    if (click === null) return;
-    questionInputValue = click.question;
-    switch (click.mode) {
+  $: $resubmission, resubmit($resubmission);
+
+  // Set clicker state to resubmission
+  function resubmit(data: Resubmission | null) {
+    if (data === null) return;
+    questionInputValue = data.question;
+    switch (data.mode) {
       case "text": {
         mathfieldEnabled = false;
         letter = "";
-        textareaValue = click.response;
+        textareaValue = data.response;
         break;
       }
       case "math": {
         mathfieldEnabled = true;
         letter = "";
-        mathfieldValue = click.response;
+        mathfieldValue = data.response;
         break;
       }
       case "letter": {
-        const match = click.response.match(/CHOICE ([A-E])/)?.[1].toLowerCase();
+        const match = data.response.match(/CHOICE ([A-E])/)?.[1].toLowerCase();
         if (match) letter = match;
         break;
       }
     }
     resubmission.set(null);
-  });
+  }
 
   // Validate and set seat code
   function saveSeatCode(e: Event) {
