@@ -9,11 +9,12 @@
   }
 
   export let title: string;
-  export let type: "checkbox" | "select" | "text";
+  export let type: "checkbox" | "select" | "text" | "button";
   export let value: string = "";
   export let options: Option[] = [];
   export let maxlength: number | undefined = undefined;
   export let placeholder: string = "";
+  export let text: string = "";
 
   let checkbox: HTMLInputElement;
 
@@ -71,5 +72,10 @@
         >
       </div>
     </label>
+  {:else if type === "button"}
+    <div class="label flex-col items-start justify-normal gap-2">
+      <span class="label-text text-neutral-content"><slot></slot></span>
+      <button class="btn btn-sm btn-neutral shadow-none" on:click>{text}</button>
+    </div>
   {/if}
 </div>

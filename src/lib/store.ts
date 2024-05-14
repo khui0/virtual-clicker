@@ -11,17 +11,23 @@ interface Resubmission {
   response: string;
 }
 
-const initialSettings = browser && localStorage.getItem("settings");
+const storedSettings = browser && localStorage.getItem("settings");
+
+const defaultSettings: Settings = {
+  theme: "auto",
+  show_code_in_title: "true",
+};
 
 export const title: Writable<string> = writable("");
 
 // Initialize store with default settings
 export const settings: Writable<Settings> = writable(
-  (initialSettings && JSON.parse(initialSettings)) || {
-    theme: "auto",
-    show_code_in_title: "true",
-  },
+  (storedSettings && JSON.parse(storedSettings)) || defaultSettings,
 );
+
+export function resetSettings() {
+  settings.set(defaultSettings);
+}
 
 settings.subscribe((value) => {
   if (browser) {

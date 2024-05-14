@@ -1,10 +1,14 @@
 <script lang="ts">
-  import { settings } from "$lib/store";
+  import { resetSettings, settings } from "$lib/store";
   import { title } from "$lib/store";
   title.set("Settings");
   import toast from "svelte-french-toast";
 
   import SettingsField from "$lib/SettingsField.svelte";
+  import Confirm from "$lib/Confirm.svelte";
+  import { db } from "$lib/db";
+
+  let confirm: Confirm;
 
   interface Option {
     name: string;
@@ -24,10 +28,10 @@
     const regex: RegExp = /^[1-9][1-6][1-5]$/;
     if (regex.test(seatCodeInputValue)) {
       $settings.code = seatCodeInputValue;
-      toast.success(`Seat code is now ${seatCodeInputValue}`, { position: "bottom-center" });
+      toast.success(`Seat code is now ${seatCodeInputValue}`);
     } else {
       e.preventDefault();
-      toast.error("Seat code isn't possible", { position: "bottom-center" });
+      toast.error("Seat code isn't possible");
     }
   }
 </script>
@@ -57,4 +61,38 @@
     bind:value={$settings.show_code_in_title}
     >Controls whether seat code is shown in window title</SettingsField
   >
+  <SettingsField
+    type="button"
+    title="Clear history"
+    text="Clear"
+    on:click={() => {
+      const result = confirm.prompt(
+        "Are you sure you want to clear your history?",
+        "This action cannot be undone!",
+        "Clear",
+      );
+      result.then(() => {
+        db.history.clear();
+        toast.success("Cleared history");
+      });
+    }}>Erases your click history. This action cannot be undone!</SettingsField
+  >
+  <SettingsField
+    type="button"
+    title="Reset settings"
+    text="Reset"
+    on:click={() => {
+      const result = confirm.prompt(
+        "Are you sure you want to reset all settings?",
+        "This action cannot be undone!",
+        "Reset",
+      );
+      result.then(() => {
+        resetSettings();
+        toast.success("Reset settings");
+      });
+    }}>Reverts all settings to their default values. This action cannot be undone!</SettingsField
+  >
 </div>
+
+<Confirm bind:this={confirm}></Confirm>
