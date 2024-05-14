@@ -1,5 +1,5 @@
-import { settings } from "./store";
-import { db } from "./db";
+import { settings } from "../lib/store";
+import { db } from "../lib/db";
 
 type Mode = "letter" | "math" | "text";
 

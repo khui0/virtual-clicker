@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { settings, resubmission, type Resubmission } from "$lib/store";
-  import { click } from "$lib/submit";
+  import { click } from "./submit";
   import toast from "svelte-french-toast";
   import "mathlive";
 
