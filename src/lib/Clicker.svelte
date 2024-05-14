@@ -5,12 +5,12 @@
   import toast from "svelte-french-toast";
   import "mathlive";
   import { MathfieldElement } from "mathlive";
-  import { DeferredPromise } from "@open-draft/deferred-promise";
 
   // Components
   import Modal from "./Modal.svelte";
   import LetterInput from "./LetterInput.svelte";
   import SymbolsList from "./SymbolsList.svelte";
+  import Mathfield from "./Mathfield.svelte";
 
   // Icons
   import BiQuestionCircle from "~icons/bi/question-circle";
@@ -18,8 +18,6 @@
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
   import BiChevronDown from "~icons/bi/chevron-down";
-
-  const mathfieldReady = new DeferredPromise();
 
   const descriptions: { [key: string]: string } = {
     "a": "agree, true, yes",
@@ -41,15 +39,14 @@
 
   let questionInputValue: string;
   let textareaValue: string;
+  let mathfieldValue: string;
+  // Used to get and set the cursor selection
   let textarea: HTMLTextAreaElement;
-  let mathfield: MathfieldElement;
 
   let mathfieldEnabled: boolean = $settings.equation_default === "true";
   let letter: string;
 
   onMount(() => {
-    // Remove Mathfield sounds
-    MathfieldElement.soundsDirectory = null;
     // Prompt user to enter seat code
     if (!$settings.code) {
       codeModal.show();
@@ -69,8 +66,7 @@
       case "math": {
         mathfieldEnabled = true;
         letter = "";
-        await mathfieldReady;
-        mathfield.value = click.response;
+        mathfieldValue = click.response;
         break;
       }
       case "letter": {
@@ -117,11 +113,11 @@
         break;
       }
       case "math": {
-        if (!mathfield.value) {
+        if (!mathfieldValue) {
           toast.error("Equation cannot be blank");
           return;
         }
-        response = mathfield.value;
+        response = mathfieldValue;
         break;
       }
       case "letter": {
@@ -134,7 +130,7 @@
     // Reset input fields
     questionInputValue = "";
     textareaValue = "";
-    if (mathfield) mathfield.value = "";
+    mathfieldValue = "";
     letter = "";
   }
 
@@ -205,8 +201,7 @@
             on:keydown={submitKeybind}
           ></textarea>
         {:else}
-          <math-field role="presentation" bind:this={mathfield} on:keydown={submitKeybind}
-          ></math-field>
+          <Mathfield bind:value={mathfieldValue} on:keydown={submitKeybind}></Mathfield>
         {/if}
       {:else}
         <div
@@ -248,32 +243,3 @@
     </form>
   </Modal>
 </div>
-
-<style>
-  math-field {
-    @apply w-full rounded-btn bg-base-200 text-base-content px-4 py-2 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] cursor-text shadow-sm;
-    --caret-color: theme(colors.base-content);
-    --contains-highlight-background-color: theme(colors.primary);
-    --text-font-family: "Figtree", sans-serif;
-  }
-
-  math-field:focus {
-    @apply outline-[var(--fallback-bc,oklch(var(--bc)/0.2))] outline-offset-2 outline-2 outline-none;
-  }
-
-  math-field::part(virtual-keyboard-toggle) {
-    @apply text-base-content bg-base-200 transition-colors;
-  }
-
-  math-field::part(virtual-keyboard-toggle):hover {
-    @apply bg-base-100;
-  }
-
-  math-field::part(menu-toggle) {
-    display: none;
-  }
-
-  math-field::part(content) {
-    padding: 0;
-  }
-</style>
