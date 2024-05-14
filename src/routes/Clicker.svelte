@@ -7,16 +7,15 @@
 
   // Components
   import Modal from "$lib/components/Modal.svelte";
-  import LetterInput from "./LetterInput.svelte";
-  import SymbolsList from "./SymbolsList.svelte";
+  import SymbolsPicker from "./SymbolsPicker.svelte";
   import MathInput from "./MathInput.svelte";
+  import LetterInput from "./LetterInput.svelte";
 
   // Icons
   import BiQuestionCircle from "~icons/bi/question-circle";
   import BiX from "~icons/bi/x";
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
-  import BiChevronDown from "~icons/bi/chevron-down";
 
   const descriptions: { [key: string]: string } = {
     "a": "agree, true, yes",
@@ -170,27 +169,18 @@
         <div class="swap-off fill-current"><BiCursorText></BiCursorText></div>
         <div class="swap-on fill-current"><BiPlusSlashMinus></BiPlusSlashMinus></div>
       </label>
-      <details class="dropdown dropdown-end">
-        <summary class="btn btn-square focus"><BiChevronDown></BiChevronDown></summary>
-        <div
-          class="dropdown-content z-[1] shadow-lg bg-base-200 rounded-box w-52 mt-1 overflow-hidden"
-        >
-          <ul class="menu max-h-80 p-2 overflow-auto flex-nowrap styled-scrollbar">
-            <SymbolsList
-              on:click={(e) => {
-                if (mathfieldEnabled) return;
-                textarea.setRangeText(
-                  e.detail.string,
-                  textarea.selectionStart,
-                  textarea.selectionEnd,
-                  "end",
-                );
-                textarea.focus();
-              }}
-            ></SymbolsList>
-          </ul>
-        </div>
-      </details>
+      <SymbolsPicker
+        on:click={(e) => {
+          if (mathfieldEnabled) return;
+          textarea.setRangeText(
+            e.detail.string,
+            textarea.selectionStart,
+            textarea.selectionEnd,
+            "end",
+          );
+          textarea.focus();
+        }}
+      ></SymbolsPicker>
     </div>
     <div>
       {#if letter === ""}
