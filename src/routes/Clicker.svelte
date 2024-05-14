@@ -9,7 +9,7 @@
   import Modal from "$lib/components/Modal.svelte";
   import LetterInput from "./LetterInput.svelte";
   import SymbolsList from "./SymbolsList.svelte";
-  import Mathfield from "./Mathfield.svelte";
+  import MathInput from "./MathInput.svelte";
 
   // Icons
   import BiQuestionCircle from "~icons/bi/question-circle";
@@ -203,7 +203,7 @@
             on:keydown={submitKeybind}
           ></textarea>
         {:else}
-          <Mathfield bind:value={mathfieldValue} on:keydown={submitKeybind}></Mathfield>
+          <MathInput bind:value={mathfieldValue} on:keydown={submitKeybind}></MathInput>
         {/if}
       {:else}
         <div
