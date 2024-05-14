@@ -3,6 +3,7 @@
   import { db } from "./db";
   import type { Click } from "./db";
   import { resubmission } from "./store";
+  import { convertLatexToMarkup, renderMathInDocument } from "mathlive";
 
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
@@ -20,6 +21,10 @@
     });
     goto("/");
   }
+
+  history.subscribe(() => {
+    renderMathInDocument();
+  });
 </script>
 
 <div role="list" class="flex flex-col gap-2 overflow-auto flex-1 mb-2 styled-scrollbar">
@@ -50,7 +55,17 @@
             {/if}
           </div>
           <p class="text-neutral-content overflow-hidden whitespace-nowrap text-ellipsis">
-            {click.response || "ERROR"}
+            {#if click.mode === "math"}
+              {@html convertLatexToMarkup(click.response)}
+            {:else if click.mode === "letter"}
+              <h3
+                class="w-8 h-8 border border-neutral-content flex items-center justify-center rounded-full"
+              >
+                {(click.response && click.response.match(/CHOICE ([A-E])/)?.[1]) || ""}
+              </h3>
+            {:else}
+              {click.response}
+            {/if}
           </p>
         </div>
         <button
