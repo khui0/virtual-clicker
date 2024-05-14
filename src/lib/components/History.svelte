@@ -1,8 +1,8 @@
 <script lang="ts">
   import { liveQuery } from "dexie";
-  import { db } from "./db";
-  import type { Click } from "./db";
-  import { resubmission } from "./store";
+  import { db } from "$lib/db";
+  import type { Click } from "$lib/db";
+  import { resubmission } from "$lib/store";
   import * as mathlive from "mathlive";
 
   import BiCursorText from "~icons/bi/cursor-text";

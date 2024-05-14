@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { title } from "./store";
+  import { title } from "$lib/store";
   import Logo from "./Logo.svelte";
 </script>
 

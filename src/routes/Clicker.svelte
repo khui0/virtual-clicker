@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { settings, resubmission, type Resubmission } from "./store";
-  import { click } from "./submit";
+  import { settings, resubmission, type Resubmission } from "$lib/store";
+  import { click } from "$lib/submit";
   import toast from "svelte-french-toast";
   import "mathlive";
 
   // Components
-  import Modal from "./Modal.svelte";
+  import Modal from "$lib/components/Modal.svelte";
   import LetterInput from "./LetterInput.svelte";
   import SymbolsList from "./SymbolsList.svelte";
   import Mathfield from "./Mathfield.svelte";
@@ -17,7 +17,6 @@
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
   import BiChevronDown from "~icons/bi/chevron-down";
-  import { get } from "svelte/store";
 
   const descriptions: { [key: string]: string } = {
     "a": "agree, true, yes",

@@ -4,8 +4,8 @@
   title.set("Settings");
   import toast from "svelte-french-toast";
 
-  import SettingsField from "$lib/SettingsField.svelte";
-  import Confirm from "$lib/Confirm.svelte";
+  import SettingsField from "./SettingsField.svelte";
+  import Confirm from "$lib/components/Confirm.svelte";
   import { db } from "$lib/db";
 
   let confirm: Confirm;

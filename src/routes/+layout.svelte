@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { title } from "$lib/store";
-  import Title from "$lib/Title.svelte";
+  import Title from "$lib/components/Title.svelte";
 
   import { Toaster } from "svelte-french-toast";
-  import History from "$lib/History.svelte";
+  import History from "$lib/components/History.svelte";
 
   import BiList from "~icons/bi/list";
   import BiInputCursorText from "~icons/bi/input-cursor-text";

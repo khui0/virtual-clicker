@@ -3,7 +3,7 @@
   import toast from "svelte-french-toast";
   title.set("Locator");
 
-  import DeskGrid from "$lib/DeskGrid.svelte";
+  import DeskGrid from "./DeskGrid.svelte";
 
   let inactivityTimeout: number;
 

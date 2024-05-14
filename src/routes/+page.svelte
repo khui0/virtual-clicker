@@ -1,6 +1,6 @@
 <script lang="ts">
   import { settings } from "$lib/store";
-  import Clicker from "$lib/Clicker.svelte";
+  import Clicker from "./Clicker.svelte";
 
   settings.subscribe(() => {
     if ($settings.code) {
