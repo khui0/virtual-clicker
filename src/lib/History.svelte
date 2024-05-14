@@ -3,7 +3,7 @@
   import { db } from "./db";
   import type { Click } from "./db";
   import { resubmission } from "./store";
-  import { convertLatexToMarkup, renderMathInDocument, renderMathInElement } from "mathlive";
+  import * as mathlive from "mathlive";
 
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
@@ -25,7 +25,7 @@
   }
 
   history.subscribe(() => {
-    renderMathInElement(list);
+    mathlive.renderMathInElement(list);
   });
 </script>
 
@@ -62,7 +62,7 @@
           </div>
           <p class="text-neutral-content overflow-hidden whitespace-nowrap text-ellipsis">
             {#if click.mode === "math"}
-              {@html convertLatexToMarkup(click.response)}
+              {@html mathlive.convertLatexToMarkup(click.response)}
             {:else if click.mode === "letter"}
               <h3
                 class="w-8 h-8 border border-neutral-content flex items-center justify-center rounded-full"
