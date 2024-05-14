@@ -23,7 +23,7 @@
 </script>
 
 <div role="list" class="flex flex-col gap-2 overflow-auto flex-1 mb-2 styled-scrollbar">
-  {#if $history}
+  {#if $history && $history.length > 0}
     {#each [...$history].reverse() as click}
       <div
         class="flex flex-row gap-2 items-center default-border px-3 py-2 rounded-btn relative group bg-base-200"
@@ -63,5 +63,11 @@
         </button>
       </div>
     {/each}
+  {:else}
+    <div
+      class="flex flex-row gap-2 items-center default-border px-3 py-2 rounded-btn relative group bg-base-200"
+    >
+      <h3>Submitted clicks will appear here</h3>
+    </div>
   {/if}
 </div>
