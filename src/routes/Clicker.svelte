@@ -171,6 +171,7 @@
         <div class="swap-on fill-current"><BiPlusSlashMinus></BiPlusSlashMinus></div>
       </label>
       <SymbolsPicker
+        disabled={mathfieldEnabled}
         on:click={(e) => {
           if (mathfieldEnabled) return;
           textarea.setRangeText(
