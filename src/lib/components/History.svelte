@@ -31,6 +31,14 @@
   history.subscribe(() => {
     mathlive.renderMathInElement(list);
   });
+
+  function getDeltaDay(start: Date, end: Date): number {
+    const DAY: number = 86_400_000;
+    const TIMEZONE_OFFSET: number = new Date().getTimezoneOffset() * 60_000;
+    const _end: number = Math.floor((end.getTime() - TIMEZONE_OFFSET) / DAY);
+    const _start: number = Math.floor((start.getTime() - TIMEZONE_OFFSET) / DAY);
+    return _end - _start;
+  }
 </script>
 
 <div
@@ -39,7 +47,12 @@
   bind:this={list}
 >
   {#if $history && $history.length > 0}
-    {#each [...$history].reverse() as click}
+    {@const array = [...$history].reverse()}
+    {#each array as click, i}
+      {@const newDay = i === 0 || getDeltaDay(click.date, array[i - 1].date) === 1}
+      {#if newDay}
+        <p>{click.date.toLocaleDateString("en-US", { dateStyle: "full" })}</p>
+      {/if}
       <div
         class="flex flex-row gap-2 items-center default-border px-3 py-2 rounded-btn relative group bg-base-200"
       >
