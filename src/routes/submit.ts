@@ -1,5 +1,6 @@
 import { settings } from "../lib/store";
 import { db } from "../lib/db";
+import { convertLatexToAsciiMath } from "mathlive";
 
 type Mode = "letter" | "math" | "text";
 
@@ -16,10 +17,11 @@ const answerField: string = import.meta.env.VITE_FORM_ANSWER;
 
 export function click(question: string, response: string, mode: Mode) {
   if (!code) return;
+  const transformedResponse = mode === "math" ? convertLatexToAsciiMath(response) : response;
   const fields = {
     [codeField]: code,
     [questionField]: question,
-    [answerField]: response,
+    [answerField]: transformedResponse,
   };
   const params = new URLSearchParams(fields).toString();
   fetch(URL + params, {
