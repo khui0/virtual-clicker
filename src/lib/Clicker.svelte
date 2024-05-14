@@ -4,7 +4,6 @@
   import { click } from "./submit";
   import toast from "svelte-french-toast";
   import "mathlive";
-  import { MathfieldElement } from "mathlive";
 
   // Components
   import Modal from "./Modal.svelte";
@@ -53,7 +52,7 @@
     }
   });
 
-  resubmission.subscribe(async (click) => {
+  resubmission.subscribe((click) => {
     if (click === null) return;
     questionInputValue = click.question;
     switch (click.mode) {
