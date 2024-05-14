@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { base } from "$app/paths";
   import { title } from "$lib/store";
   import Title from "$lib/components/Title.svelte";
 
@@ -31,13 +32,13 @@
 
       if (control && e.key === ",") {
         e.preventDefault();
-        goto("/settings");
+        goto(`${base}/settings`);
       } else if (control && e.key === ".") {
         e.preventDefault();
-        goto("/history");
+        goto(`${base}/history`);
       } else if (control && e.key === "Escape") {
         e.preventDefault();
-        goto("/");
+        goto(`${base}/`);
       }
     });
   });
@@ -71,7 +72,7 @@
       </div>
       <div class="grid grid-cols-2 gap-2" role="menu">
         <a
-          href="/"
+          href="{base}/"
           class="btn default-border shadow-none"
           on:click={() => {
             sidebarVisible = false;
@@ -81,7 +82,7 @@
           <span class="font-normal">Clicker</span>
         </a>
         <a
-          href="/history"
+          href="{base}/history"
           class="btn default-border shadow-none"
           on:click={() => {
             sidebarVisible = false;
@@ -91,7 +92,7 @@
           <span class="font-normal">History</span>
         </a>
         <a
-          href="/settings"
+          href="{base}/settings"
           class="btn default-border shadow-none"
           on:click={() => {
             sidebarVisible = false;

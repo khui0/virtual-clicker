@@ -13,4 +13,7 @@ export default {
       strict: true,
     }),
   },
+  paths: {
+    base: process.argv.includes("dev") ? "" : "/v4",
+  },
 };

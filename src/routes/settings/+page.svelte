@@ -1,12 +1,13 @@
 <script lang="ts">
+  import { base } from "$app/paths";
   import { resetSettings, settings } from "$lib/store";
   import { title } from "$lib/store";
   title.set("Settings");
   import toast from "svelte-french-toast";
+  import { db } from "$lib/db";
 
   import SettingsField from "./SettingsField.svelte";
   import Confirm from "$lib/components/Confirm.svelte";
-  import { db } from "$lib/db";
 
   let confirm: Confirm;
 
@@ -44,7 +45,7 @@
     placeholder="000"
     bind:value={seatCodeInputValue}
     on:save={validateSeatCode}
-    >Your 3-digit seat code. <a href="/locator" class="link">Need help?</a></SettingsField
+    >Your 3-digit seat code. <a href="{base}/locator" class="link">Need help?</a></SettingsField
   >
   <SettingsField type="select" title="Theme" options={themes} bind:value={$settings.theme}
     >Select a theme</SettingsField

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { base } from "$app/paths";
   import { settings, resubmission, type Resubmission } from "$lib/store";
   import { click } from "./submit";
   import toast from "svelte-french-toast";
@@ -227,7 +228,7 @@
         maxlength="3"
         bind:value={codeModalValue}
       />
-      <a href="/locator" class="btn btn-square"><BiQuestionCircle></BiQuestionCircle></a>
+      <a href="{base}/locator" class="btn btn-square"><BiQuestionCircle></BiQuestionCircle></a>
     </div>
     <form method="dialog" class="flex gap-2">
       <button class="btn btn-sm flex-1">Cancel</button>

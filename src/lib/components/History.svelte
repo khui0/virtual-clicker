@@ -6,6 +6,7 @@
   import * as mathlive from "mathlive";
   import { createEventDispatcher } from "svelte";
   import { goto } from "$app/navigation";
+  import { base } from "$app/paths";
 
   import BiCursorText from "~icons/bi/cursor-text";
   import BiPlusSlashMinus from "~icons/bi/plus-slash-minus";
@@ -24,7 +25,7 @@
       question: click.question,
       response: click.response,
     });
-    goto("/");
+    goto(`${base}/`);
   }
 
   history.subscribe(() => {
