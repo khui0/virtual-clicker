@@ -17,9 +17,9 @@
     const regex: RegExp = /^[1-9][1-6][1-5]$/;
     if (regex.test(code)) {
       $settings.code = code;
-      toast.success(`Seat code is now ${code}`, { position: "bottom-center" });
+      toast.success(`Seat code is now ${code}`);
     } else {
-      toast.error("Seat code isn't possible", { position: "bottom-center" });
+      toast.error("Seat code isn't possible");
     }
   }
 </script>

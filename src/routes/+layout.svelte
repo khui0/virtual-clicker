@@ -89,4 +89,4 @@
   </div>
 </div>
 
-<Toaster></Toaster>
+<Toaster toastOptions={{ position: "bottom-center" }}></Toaster>

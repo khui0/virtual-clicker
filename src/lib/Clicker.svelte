@@ -87,10 +87,10 @@
     const regex: RegExp = /^[1-9][1-6][1-5]$/;
     if (regex.test(codeModalValue)) {
       $settings.code = codeModalValue;
-      toast.success(`Seat code is now ${codeModalValue}`, { position: "bottom-center" });
+      toast.success(`Seat code is now ${codeModalValue}`);
     } else {
       e.preventDefault();
-      toast.error("Seat code isn't possible", { position: "bottom-center" });
+      toast.error("Seat code isn't possible");
     }
   }
 
@@ -104,13 +104,13 @@
       return;
     }
     if (!questionInputValue) {
-      toast.error("Question cannot be blank", { position: "bottom-center" });
+      toast.error("Question cannot be blank");
       return;
     }
     switch (mode) {
       case "text": {
         if (!textareaValue) {
-          toast.error("Response cannot be blank", { position: "bottom-center" });
+          toast.error("Response cannot be blank");
           return;
         }
         response = textareaValue;
@@ -118,7 +118,7 @@
       }
       case "math": {
         if (!mathfield.value) {
-          toast.error("Equation cannot be blank", { position: "bottom-center" });
+          toast.error("Equation cannot be blank");
           return;
         }
         response = mathfield.value;
@@ -130,7 +130,7 @@
       }
     }
     click(questionInputValue, response, mode);
-    toast.success("Response submitted!", { position: "bottom-center" });
+    toast.success("Response submitted!");
     // Reset input fields
     questionInputValue = "";
     textareaValue = "";
