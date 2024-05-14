@@ -34,3 +34,7 @@ html {
 div.toaster > div.wrapper > div {
   @apply bg-base-200 rounded-box text-base-content shadow-lg;
 }
+
+::placeholder {
+  @apply !text-base-content/50;
+}
