@@ -163,15 +163,21 @@ function resetInputs() {
 
 // Submit to Google Forms
 function submitClick(code, question, answer) {
-  const fields = {
-    "entry.1896388126": code,
-    "entry.1232458460": question,
-    "entry.1065046570": answer,
-  };
+  // Make sure your environment variables are set
+  const URL = import.meta.env.VITE_FORM_URL; // Google Forms URL in the format https://docs.google.com/forms/d/e/{id}formResponse?
+  const CODE_FIELD = import.meta.env.VITE_FORM_CODE; // Field id in the format entry.1234567890
+  const QUESTION_FIELD = import.meta.env.VITE_FORM_QUESTION;
+  const ANSWER_FIELD = import.meta.env.VITE_FORM_ANSWER;
+
+  const fields = {};
+
+  fields[CODE_FIELD] = code;
+  fields[QUESTION_FIELD] = question;
+  fields[ANSWER_FIELD] = answer;
+
   const params = new URLSearchParams(fields).toString();
-  const url =
-    "https://docs.google.com/forms/d/e/1FAIpQLSfwDCxVqO2GuB4jhk9iAl7lzoA2TsRlX6hz052XkEHbLrbryg/formResponse?";
-  fetch(url + params, {
+
+  fetch(URL + params, {
     method: "POST",
     mode: "no-cors",
     headers: {
